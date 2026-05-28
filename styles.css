@@ -871,3 +871,313 @@ section { padding: clamp(60px, 9vw, 140px) 0; }
 }
 
 .drift-up { animation: drift-up 0.8s ease both; }
+
+/* ============================================
+   Mobile UX — Hamburger, nav drawer, bottom bar,
+   sticky buy, touch fixes
+   ============================================ */
+
+/* ---- Hamburger button ---- */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--ink);
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+.nav-toggle svg { width: 22px; height: 22px; }
+.nav-toggle:active { color: var(--green); }
+
+/* ---- Mobile nav drawer ---- */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  visibility: hidden;
+  pointer-events: none;
+}
+.mobile-nav.open {
+  visibility: visible;
+  pointer-events: auto;
+}
+.mobile-nav__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 31, 26, 0.5);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.mobile-nav.open .mobile-nav__scrim { opacity: 1; }
+
+.mobile-nav__panel {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: min(300px, 84vw);
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transform: translateX(-100%);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 4px 0 32px rgba(26,31,26,0.18);
+}
+.mobile-nav.open .mobile-nav__panel { transform: translateX(0); }
+
+.mobile-nav__header {
+  padding: 18px 16px 18px 24px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.mobile-nav__close {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+.mobile-nav__close svg { width: 20px; height: 20px; }
+
+.mobile-nav__links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.mobile-nav__links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s;
+}
+.mobile-nav__links a:active { background: var(--cream-soft); }
+.mobile-nav__links a.active { color: var(--green); }
+.mobile-nav__links a.active::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+.mobile-nav__footer {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+/* ---- Bottom navigation bar ---- */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: var(--cream-light);
+  border-top: 1px solid var(--line);
+  z-index: 45;
+  align-items: stretch;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.bottom-nav__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.15s;
+}
+.bottom-nav__item svg { width: 22px; height: 22px; }
+.bottom-nav__item.active { color: var(--green); }
+.bottom-nav__item:active { background: var(--cream-soft); }
+
+.bottom-nav__badge {
+  position: absolute;
+  top: 7px;
+  right: calc(50% - 20px);
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background: var(--wine);
+  color: var(--cream);
+  font-size: 9px;
+  font-weight: 700;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* ---- Sticky buy bar (product page) ---- */
+.sticky-buy {
+  position: fixed;
+  left: 0; right: 0;
+  bottom: 60px;
+  background: var(--cream-light);
+  border-top: 1px solid var(--line);
+  padding: 10px 20px;
+  display: none;
+  align-items: center;
+  gap: 16px;
+  z-index: 44;
+  box-shadow: 0 -6px 24px rgba(26,31,26,0.10);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sticky-buy.visible { transform: translateY(0); }
+.sticky-buy__info { flex: 1; min-width: 0; overflow: hidden; }
+.sticky-buy__name {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sticky-buy__price {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+.sticky-buy__btn {
+  flex-shrink: 0;
+  padding: 14px 18px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+
+/* ---- Toast position on mobile ---- */
+@media (max-width: 768px) {
+  .cart-toast { bottom: 80px !important; }
+}
+
+/* ==== @media (max-width: 768px) ==== */
+@media (max-width: 768px) {
+  /* Header: hamburger left, logo center, cart right */
+  .site-header__inner {
+    grid-template-columns: 44px 1fr 44px;
+    height: 64px;
+    gap: 0;
+  }
+  .nav-toggle { display: flex; }
+  .site-nav { display: none !important; }
+  .tool-link { display: none; }
+  .tool-divider { display: none; }
+  .site-tools { gap: 0; justify-content: flex-end; }
+  /* Keep only cart icon in header on mobile */
+  .site-tools .tool-btn:not([aria-label="Carrinho"]) { display: none; }
+  .brand-mark__top { font-size: 17px; }
+  .brand-mark__sub { font-size: 11px; }
+
+  /* Body padding: make room for bottom nav + safe area */
+  body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
+
+  /* Show bottom nav */
+  .bottom-nav { display: flex; }
+
+  /* Show sticky buy bar (hidden until .visible added by JS) */
+  .sticky-buy { display: flex; }
+
+  /* Quick-add: always visible on touch (no hover state on mobile) */
+  .product-card__quick {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  /* Remove favourite on mobile to keep card clean */
+  .quick-fav { display: none; }
+  .quick-add {
+    font-size: 10px;
+    letter-spacing: 0.10em;
+    padding: 13px 8px;
+  }
+
+  /* Tighter product grid */
+  .product-grid { gap: 14px; }
+
+  /* Section head: stack title and "ver todos" link */
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  /* Promo bar: single message on mobile */
+  .promo-bar span:not(:first-child) { display: none; }
+
+  /* Footer: single column */
+  .footer-grid { grid-template-columns: 1fr !important; gap: 28px; }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  /* Newsletter form: stack on mobile */
+  .newsletter form { flex-direction: column; }
+  .newsletter button { padding: 16px 20px; }
+}
+
+/* ==== @media (max-width: 480px) ==== */
+@media (max-width: 480px) {
+  /* 2-column product grid on small phones */
+  .product-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
+  .product-grid--3 { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* Hero CTAs: stack */
+  .hero__actions { flex-direction: column; }
+  .hero__actions .btn { width: 100%; justify-content: center; }
+
+  /* Age modal: tighter padding */
+  .age-card { padding: 40px 20px 32px; }
+  .age-card__actions { grid-template-columns: 1fr; }
+
+  /* Pairing cards: ensure they breathe */
+  .pairing-card { min-height: auto; padding: 28px 20px; }
+}
