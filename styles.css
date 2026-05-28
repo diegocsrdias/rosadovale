@@ -1279,16 +1279,16 @@ section { padding: clamp(60px, 9vw, 140px) 0; }
    Logo / Brand-mark image
    ============================================ */
 .brand-mark__logo {
-  height: 40px;
+  height: 80px;
   width: auto;
   display: block;
 }
-.site-header .brand-mark__logo { height: 36px; }
-.footer-brand .brand-mark__logo { height: 44px; }
-.age-card__mark .brand-mark__logo { height: 52px; margin: 0 auto 8px; }
+.site-header .brand-mark__logo { height: 72px; }
+.footer-brand .brand-mark__logo { height: 88px; }
+.age-card__mark .brand-mark__logo { height: 104px; margin: 0 auto 8px; }
 @media (max-width: 768px) {
-  .brand-mark__logo { height: 32px; }
-  .site-header .brand-mark__logo { height: 30px; }
+  .brand-mark__logo { height: 64px; }
+  .site-header .brand-mark__logo { height: 60px; }
 }
 
 /* ============================================
