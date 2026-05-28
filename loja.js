@@ -97,6 +97,7 @@
       const qty = item ? item.qty : 0;
       el.classList.toggle('is-zero', qty === 0);
       el.querySelector('.card-stepper__n').textContent = qty;
+      el.querySelector('.card-stepper__up').textContent = qty === 0 ? 'Adicionar' : '+';
     }
 
     /* ─── Render grid ─── */

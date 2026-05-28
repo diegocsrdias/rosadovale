@@ -94,6 +94,8 @@
       prodStepper.classList.toggle('is-zero', qty === 0);
       const n = document.getElementById('prod-stepper-n');
       if (n) n.textContent = qty;
+      const upBtn = prodStepper.querySelector('.prod-stepper__up');
+      if (upBtn) upBtn.textContent = qty === 0 ? 'Adicionar ao carrinho' : '+';
     }
 
     if (prodStepper) {
