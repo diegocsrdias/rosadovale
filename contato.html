@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -59,11 +59,11 @@
 
   /* Visit / map */
   .visit-section { background: var(--paper); padding: 0; }
-  .visit-section__grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 540px; }
+  .visit-section__grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 540px; height: 540px; }
   @media (max-width: 900px) { .visit-section__grid { grid-template-columns: 1fr; } }
   .visit-section__copy { padding: clamp(40px, 6vw, 80px); display: flex; flex-direction: column; justify-content: center; gap: 24px; }
   .visit-section__copy h2 em { color: var(--green); }
-  .visit-section__map { position: relative; min-height: 400px; }
+  .visit-section__map { position: relative; min-height: 400px; height: 100%; }
   .visit-section__map .ph { position: absolute; inset: 0; }
   .pin-marker { position: absolute; top: 45%; left: 50%; transform: translate(-50%,-100%); }
   .pin-marker__card { background: var(--paper); padding: 14px 18px; box-shadow: 0 8px 24px rgba(46,63,46,0.2); }
@@ -96,7 +96,7 @@
 <!-- AGE MODAL -->
 <div class="age-modal" data-age-modal hidden>
   <div class="age-card">
-    <div class="age-card__mark brand-mark"><span class="brand-mark__top">ROSA DO VALE</span><span class="brand-mark__sub">vinhos & espumantes</span></div>
+    <div class="age-card__mark brand-mark"><img src="Imagens/logo.png" alt="Sítio Rosa do Vale" class="brand-mark__logo"></div>
     <h2>Você tem 18 anos ou mais?</h2>
     <p>Este site contém produtos com teor alcoólico. Para entrar, confirme que você é maior de idade.</p>
     <div class="age-card__actions"><button class="btn btn-primary" data-age-yes>Sim, tenho 18+</button><button class="btn btn-outline" data-age-no>Não tenho</button></div>
@@ -122,7 +122,7 @@
       <a href="loja.html">Loja</a>
       <a href="contato.html" class="active">Contato</a>
     </nav>
-    <a href="index.html" class="brand-mark"><img src="Imagens/logo.png" alt="S�tio Rosa do Vale" class="brand-mark__logo"><span class="brand-mark__top">ROSA DO VALE</span><span class="brand-mark__sub">vinhos & espumantes</span></a>
+    <a href="index.html" class="brand-mark"><img src="Imagens/logo.png" alt="S�tio Rosa do Vale" class="brand-mark__logo"></a>
     <div class="site-tools">
       <button class="tool-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
       <a href="conta.html" class="tool-link">Entrar</a>
@@ -320,7 +320,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="brand-mark"><span class="brand-mark__top">ROSA DO VALE</span><span class="brand-mark__sub">vinhos &amp; espumantes</span></div>
+        <div class="brand-mark"><img src="Imagens/logo.png" alt="Sítio Rosa do Vale" class="brand-mark__logo"></div>
         <p class="footer-tag">"Vinho de família, feito com o cuidado de sempre."</p>
         <div class="socials">
           <a href="https://www.instagram.com/sitiorosadovale"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg></a>

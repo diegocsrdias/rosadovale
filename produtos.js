@@ -28,7 +28,7 @@ const PRODUTOS = [
     featured: true,
     safra: '2024',
     docura: 20, acidez: 75, corpo: 55, bolha: 80, final: 70,
-    harmonizacaoChips: ['🦐 Frutos do mar', '🧀 Queijos brancos', '🥗 Saladas com frutas', '🍓 Morango e framboesa', '🍤 Aperitivos'],
+    harmonizacaoChips: ['Frutos do mar', 'Queijos brancos', 'Saladas com frutas', 'Morango e framboesa', 'Aperitivos'],
   },
   {
     id: 'espumante-natural-branco-brut',
@@ -53,7 +53,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2024',
     docura: 18, acidez: 72, corpo: 50, bolha: 80, final: 65,
-    harmonizacaoChips: ['🧀 Queijos', '🍕 Pizzas', '🍝 Massas', '🥗 Canapés', '🍤 Aperitivos'],
+    harmonizacaoChips: ['Queijos', 'Pizzas', 'Massas', 'Canapés', 'Aperitivos'],
   },
   {
     id: 'espumante-branco-demi-sec',
@@ -78,7 +78,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2024',
     docura: 50, acidez: 60, corpo: 50, bolha: 75, final: 60,
-    harmonizacaoChips: ['🍰 Sobremesas', '🍓 Frutas', '🎂 Bolos', '🍕 Pizzas', '🧀 Queijos'],
+    harmonizacaoChips: ['Sobremesas', 'Frutas', 'Bolos', 'Pizzas', 'Queijos'],
   },
   {
     id: 'espumante-moscatel-rose',
@@ -103,7 +103,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2024',
     docura: 65, acidez: 45, corpo: 40, bolha: 75, final: 55,
-    harmonizacaoChips: ['🍓 Frutas vermelhas', '🍰 Sobremesas', '🌸 Aperitivos leves', '🍫 Chocolates'],
+    harmonizacaoChips: ['Frutas vermelhas', 'Sobremesas', 'Aperitivos leves', 'Chocolates'],
   },
 
   /* ═══════════════════════════════════════════
@@ -132,7 +132,7 @@ const PRODUTOS = [
     featured: true,
     safra: '2024',
     docura: 18, acidez: 78, corpo: 65, bolha: 88, final: 80,
-    harmonizacaoChips: ['🦐 Frutos do mar', '🧀 Queijos', '🫕 Risotos', '🐟 Peixes', '🍤 Aperitivos'],
+    harmonizacaoChips: ['Frutos do mar', 'Queijos', 'Risotos', 'Peixes', 'Aperitivos'],
   },
   {
     id: 'espumante-nature-branco-tradicional',
@@ -157,7 +157,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2024',
     docura: 5, acidez: 80, corpo: 70, bolha: 90, final: 85,
-    harmonizacaoChips: ['🦐 Frutos do mar', '🐟 Peixes nobres', '🧀 Queijos curados', '🫒 Charcutaria'],
+    harmonizacaoChips: ['Frutos do mar', 'Peixes nobres', 'Queijos curados', 'Charcutaria'],
   },
   {
     id: 'espumante-natural-rose-nature-tradicional',
@@ -182,7 +182,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2024',
     docura: 5, acidez: 78, corpo: 68, bolha: 90, final: 82,
-    harmonizacaoChips: ['🦐 Frutos do mar', '🐟 Peixes', '🧀 Queijos curados', '🫒 Charcutaria', '🍤 Aperitivos finos'],
+    harmonizacaoChips: ['Frutos do mar', 'Peixes', 'Queijos curados', 'Charcutaria', 'Aperitivos finos'],
   },
   {
     id: 'espumante-rose-sur-lie-buzios',
@@ -207,7 +207,7 @@ const PRODUTOS = [
     featured: true,
     safra: '2024',
     docura: 5, acidez: 85, corpo: 80, bolha: 95, final: 92,
-    harmonizacaoChips: ['🧀 Queijos especiais', '🫒 Charcutaria fina', '🍕 Pizzas', '🥗 Canapés'],
+    harmonizacaoChips: ['Queijos especiais', 'Charcutaria fina', 'Pizzas', 'Canapés'],
   },
 
   /* ═══════════════════════════════════════════
@@ -236,7 +236,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2024',
     docura: 22, acidez: 68, corpo: 45, bolha: 72, final: 60,
-    harmonizacaoChips: ['🍤 Petiscos', '🧀 Queijos frescos', '🥗 Aperitivos', '🎉 Brindes'],
+    harmonizacaoChips: ['Petiscos', 'Queijos frescos', 'Aperitivos', 'Brindes'],
   },
   {
     id: 'vinho-espumante-natural-branco-brut',
@@ -261,7 +261,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2024',
     docura: 18, acidez: 70, corpo: 45, bolha: 72, final: 60,
-    harmonizacaoChips: ['🦐 Frutos do mar', '🧀 Queijos', '🥗 Canapés', '🍤 Aperitivos'],
+    harmonizacaoChips: ['Frutos do mar', 'Queijos', 'Canapés', 'Aperitivos'],
   },
   {
     id: 'vinho-moscatel-espumante-rose',
@@ -286,7 +286,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2024',
     docura: 70, acidez: 40, corpo: 35, bolha: 70, final: 50,
-    harmonizacaoChips: ['🍓 Frutas', '🍰 Sobremesas', '🌸 Aperitivos'],
+    harmonizacaoChips: ['Frutas', 'Sobremesas', 'Aperitivos'],
   },
   {
     id: 'vinho-moscatel-espumante-branco',
@@ -311,7 +311,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2024',
     docura: 72, acidez: 38, corpo: 35, bolha: 68, final: 48,
-    harmonizacaoChips: ['🍑 Pêssego', '🍯 Mel', '🍰 Sobremesas', '🌸 Aperitivos'],
+    harmonizacaoChips: ['Pêssego', 'Mel', 'Sobremesas', 'Aperitivos'],
   },
 
   /* ═══════════════════════════════════════════
@@ -340,7 +340,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2024',
     docura: 75, acidez: 42, corpo: 38, bolha: 72, final: 52,
-    harmonizacaoChips: ['🎂 Bolos de casamento', '🍑 Saladas de frutas', '🍦 Sorvete', '🌸 Aperitivos'],
+    harmonizacaoChips: ['Bolos de casamento', 'Saladas de frutas', 'Sorvete', 'Aperitivos'],
   },
 
   /* ═══════════════════════════════════════════
@@ -369,7 +369,7 @@ const PRODUTOS = [
     featured: true,
     safra: '2023',
     docura: 5, acidez: 60, corpo: 85, bolha: 0, final: 80,
-    harmonizacaoChips: ['🥩 Churrasco', '🧀 Queijos curados', '🍝 Massas', '🍄 Cogumelos', '🍫 Chocolate amargo'],
+    harmonizacaoChips: ['Churrasco', 'Queijos curados', 'Massas', 'Cogumelos', 'Chocolate amargo'],
   },
   {
     id: 'vinho-fino-tinto-tannat',
@@ -394,7 +394,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2023',
     docura: 5, acidez: 65, corpo: 90, bolha: 0, final: 85,
-    harmonizacaoChips: ['🥩 Carnes vermelhas', '🧀 Queijos curados', '🫒 Charcutaria'],
+    harmonizacaoChips: ['Carnes vermelhas', 'Queijos curados', 'Charcutaria'],
   },
   {
     id: 'vinho-fino-tinto-merlot',
@@ -419,7 +419,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2023',
     docura: 8, acidez: 58, corpo: 75, bolha: 0, final: 75,
-    harmonizacaoChips: ['🍝 Massas', '🫕 Risotos', '🥩 Carnes leves', '🧀 Queijos'],
+    harmonizacaoChips: ['Massas', 'Risotos', 'Carnes leves', 'Queijos'],
   },
 
   /* ═══════════════════════════════════════════
@@ -448,7 +448,7 @@ const PRODUTOS = [
     featured: true,
     safra: '2024',
     docura: 5, acidez: 65, corpo: 72, bolha: 0, final: 70,
-    harmonizacaoChips: ['🍝 Massas', '🦐 Frutos do mar', '🐟 Peixes', '🧀 Queijos brancos'],
+    harmonizacaoChips: ['Massas', 'Frutos do mar', 'Peixes', 'Queijos brancos'],
   },
   {
     id: 'vinho-fino-branco-moscato-alexandria',
@@ -473,7 +473,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2024',
     docura: 10, acidez: 70, corpo: 68, bolha: 0, final: 72,
-    harmonizacaoChips: ['🦐 Frutos do mar', '🐟 Peixes', '🧀 Queijos frescos', '🫒 Defumados'],
+    harmonizacaoChips: ['Frutos do mar', 'Peixes', 'Queijos frescos', 'Defumados'],
   },
 
   /* ═══════════════════════════════════════════
@@ -502,7 +502,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2024',
     docura: 8, acidez: 60, corpo: 45, bolha: 0, final: 55,
-    harmonizacaoChips: ['🥗 Saladas', '🐟 Peixes', '🍝 Massas leves', '🍤 Petiscos'],
+    harmonizacaoChips: ['Saladas', 'Peixes', 'Massas leves', 'Petiscos'],
   },
   {
     id: 'vinho-mesa-tinto-suave',
@@ -527,7 +527,7 @@ const PRODUTOS = [
     featured: false,
     safra: '2024',
     docura: 45, acidez: 52, corpo: 55, bolha: 0, final: 50,
-    harmonizacaoChips: ['🫕 Guisados', '🍝 Massas frescas', '🧀 Queijos', '🍰 Sobremesas leves'],
+    harmonizacaoChips: ['Guisados', 'Massas frescas', 'Queijos', 'Sobremesas leves'],
   },
 
   /* ═══════════════════════════════════════════
@@ -555,7 +555,7 @@ const PRODUTOS = [
     tagStyle: 'background:var(--gold); color:var(--ink);',
     featured: true,
     safra: '2024',
-    harmonizacaoChips: ['🥂 Puro gelado', '🍳 Café da manhã', '🧃 Com gelo', '👧 Para crianças'],
+    harmonizacaoChips: ['Puro gelado', 'Café da manhã', 'Com gelo', 'Para crianças'],
   },
   {
     id: 'suco-bergamota',
@@ -579,7 +579,7 @@ const PRODUTOS = [
     tagStyle: '',
     featured: false,
     safra: '2024',
-    harmonizacaoChips: ['🥂 Puro gelado', '🍳 Café da manhã', '🧃 Com gelo'],
+    harmonizacaoChips: ['Puro gelado', 'Café da manhã', 'Com gelo'],
   },
 
   /* ═══════════════════════════════════════════
@@ -607,7 +607,7 @@ const PRODUTOS = [
     tagStyle: '',
     featured: false,
     safra: '2024',
-    harmonizacaoChips: ['🏖️ Praia', '🏊 Piscina', '🍤 Petiscos', '🎉 Eventos'],
+    harmonizacaoChips: ['️ Praia', 'Piscina', 'Petiscos', 'Eventos'],
   },
   {
     id: 'katats-fardo',
@@ -631,7 +631,7 @@ const PRODUTOS = [
     tagStyle: 'background:var(--green); color:var(--cream);',
     featured: false,
     safra: '2024',
-    harmonizacaoChips: ['🎉 Eventos', '🍖 Churrascos', '👫 Reuniões', '🎊 Festas'],
+    harmonizacaoChips: ['Eventos', 'Churrascos', 'Reuniões', 'Festas'],
   },
 
 ];

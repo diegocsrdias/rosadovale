@@ -139,8 +139,7 @@ document.querySelectorAll("[data-gallery]").forEach(g => {
     <div class="mobile-nav__panel">
       <div class="mobile-nav__header">
         <div class="brand-mark" style="align-items:flex-start">
-          <span class="brand-mark__top" style="font-size:16px">ROSA DO VALE</span>
-          <span class="brand-mark__sub">vinhos &amp; espumantes</span>
+          <img src="Imagens/logo.png" alt="Sítio Rosa do Vale" class="brand-mark__logo">
         </div>
         <button class="mobile-nav__close" aria-label="Fechar menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 6L6 18M6 6l12 12"/></svg>
