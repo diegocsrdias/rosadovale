@@ -52,31 +52,6 @@
   .shop {
     padding: clamp(40px, 6vw, 80px) 0 clamp(60px, 9vw, 120px);
   }
-  .shop__grid {
-    display: grid;
-    grid-template-columns: 240px 1fr;
-    gap: 56px;
-    align-items: start;
-  }
-  @media (max-width: 900px) { .shop__grid { grid-template-columns: 1fr; } }
-
-  .filters { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 36px; }
-  .filter__title {
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin-bottom: 16px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--ink);
-  }
-  .filter__list { display: flex; flex-direction: column; gap: 10px; }
-  .filter__list label { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-soft); cursor: pointer; }
-  .filter__list label:hover { color: var(--ink); }
-  .filter__list .count { margin-left: auto; font-size: 11px; color: var(--ink-muted); }
-  .filter__price { display: flex; gap: 8px; align-items: center; font-size: 13px; }
-  .filter__price input { width: 80px; padding: 10px; border: 1px solid var(--line); background: var(--paper); font: inherit; font-size: 13px; }
-  .clear-link { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--wine); border-bottom: 1px solid var(--wine); padding-bottom: 2px; font-weight: 600; align-self: flex-start; }
 
   /* listing toolbar */
   .toolbar {
@@ -215,55 +190,6 @@
 <section class="shop">
   <div class="container">
     <div class="shop__grid">
-
-      <!-- FILTERS -->
-      <aside class="filters">
-        <div>
-          <div class="filter__title">Tipo</div>
-          <div class="filter__list">
-            <label class="check"><input type="checkbox" checked>Espumante natural<span class="count">02</span></label>
-            <label class="check"><input type="checkbox" checked>Espumante <span class="count">02</span></label>
-            <label class="check"><input type="checkbox">Vinho fino tinto <span class="count">01</span></label>
-            <label class="check"><input type="checkbox">Vinho fino branco <span class="count">03</span></label>
-            <label class="check"><input type="checkbox">Vinho de mesa <span class="count">02</span></label>
-            <label class="check"><input type="checkbox">Suco integral <span class="count">02</span></label>
-          </div>
-        </div>
-
-        <div>
-          <div class="filter__title">Casta / uva</div>
-          <div class="filter__list">
-            <label class="check"><input type="checkbox">Cabernet Sauvignon</label>
-            <label class="check"><input type="checkbox">Chardonnay</label>
-            <label class="check"><input type="checkbox">Moscato</label>
-            <label class="check"><input type="checkbox">Moscato de Alexandria</label>
-            <label class="check"><input type="checkbox">Pinot Noir</label>
-            <label class="check"><input type="checkbox">Bordô</label>
-            <label class="check"><input type="checkbox">Niágara</label>
-          </div>
-        </div>
-
-        <div>
-          <div class="filter__title">Preço</div>
-          <div class="filter__price">
-            <input type="number" placeholder="R$ 30">
-            <span>—</span>
-            <input type="number" placeholder="R$ 200">
-          </div>
-        </div>
-
-        <div>
-          <div class="filter__title">Doçura</div>
-          <div class="filter__list">
-            <label class="check"><input type="checkbox">Brut</label>
-            <label class="check"><input type="checkbox">Seco</label>
-            <label class="check"><input type="checkbox">Demi-sec</label>
-            <label class="check"><input type="checkbox">Suave</label>
-          </div>
-        </div>
-
-        <a href="#" class="clear-link">Limpar filtros ✕</a>
-      </aside>
 
       <!-- LISTING -->
       <div>
