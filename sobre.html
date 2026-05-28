@@ -110,21 +110,25 @@
   }
   .editorial__grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: 80px;
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     padding: 0 var(--gutter);
   }
-  .editorial__grid > div { position: relative; }
-  .editorial__grid > div .ph { position: absolute; inset: 0; }
-  .e-a { grid-column: 1 / 7; grid-row: span 6; }
-  .e-b { grid-column: 7 / 13; grid-row: span 4; }
-  .e-c { grid-column: 7 / 10; grid-row: span 4; }
-  .e-d { grid-column: 10 / 13; grid-row: span 4; }
-  @media (max-width: 900px) {
-    .editorial__grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 120px; }
-    .e-a, .e-b, .e-c, .e-d { grid-column: span 1; grid-row: span 2; }
-    .e-a { grid-column: span 2; grid-row: span 3; }
+  .editorial__grid > div {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+  .editorial__grid > div img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  @media (max-width: 700px) {
+    .editorial__grid { grid-template-columns: 1fr; }
   }
 
   /* Values */
@@ -189,10 +193,10 @@
   .stats__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
   @media (max-width: 800px) { .stats__grid { grid-template-columns: 1fr 1fr; } }
   .stat__num {
-    font-size: clamp(56px, 8vw, 112px);
+    font-size: clamp(32px, 3.8vw, 48px);
     font-weight: 700;
     letter-spacing: -0.04em;
-    line-height: 0.9;
+    line-height: 1.1;
     margin-bottom: 10px;
     color: var(--green-deep);
   }
@@ -337,10 +341,10 @@
 <!-- EDITORIAL GRID -->
 <section class="editorial" style="padding: clamp(40px, 8vw, 100px) 0;">
   <div class="editorial__grid">
-    <div class="e-a"><img src="Imagens/panorâmica da parreira · março 2024.png" alt="Panorâmica da parreira · Março 2024" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-    <div class="e-b"><img src="Imagens/cesto de uva bordô recém-colhida.png" alt="Cesto de uva bordô recém-colhida" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-    <div class="e-c"><img src="Imagens/cantina · barricas.png" alt="Cantina · Barricas" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-    <div class="e-d"><img src="Imagens/vinho na taça.png" alt="Vinho na taça" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+    <div class="e-a"><img src="Imagens/panorâmica da parreira · março 2024.png" alt="Panorâmica da parreira · Março 2024"></div>
+    <div class="e-b"><img src="Imagens/cesto de uva bordô recém-colhida.png" alt="Cesto de uva bordô recém-colhida"></div>
+    <div class="e-c"><img src="Imagens/cantina · barricas.png" alt="Cantina · Barricas"></div>
+    <div class="e-d"><img src="Imagens/vinho na taça.png" alt="Vinho na taça"></div>
   </div>
 </section>
 
@@ -481,7 +485,6 @@
     <div class="footer-bottom">
       <span>© <span data-year>2026</span> Sítio Rosa do Vale · CNPJ 00.000.000/0001-00</span>
       <span>Bebida alcoólica · Aprecie com moderação</span>
-      <span>Site refeito com carinho · v1.0</span>
     </div>
   </div>
 </footer>

@@ -20,10 +20,10 @@
   .contato-hero .eyebrow { color: var(--gold-soft); display:block; margin-bottom: 18px; }
 
   .contact-block { padding: clamp(60px, 9vw, 100px) 0; background: var(--cream); }
-  .contact-block__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start; }
+  .contact-block__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: stretch; }
   @media (max-width: 900px) { .contact-block__grid { grid-template-columns: 1fr; gap: 40px; } }
 
-  .contact-form { background: var(--paper); padding: 48px; }
+  .contact-form { background: var(--paper); padding: 48px; display: flex; flex-direction: column; }
   .contact-form h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 8px; }
   .contact-form h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--green); }
   .contact-form > p { font-size: 14px; color: var(--ink-soft); margin-bottom: 32px; }
@@ -59,11 +59,15 @@
 
   /* Visit / map */
   .visit-section { background: var(--paper); padding: 0; }
-  .visit-section__grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 540px; height: 540px; }
-  @media (max-width: 900px) { .visit-section__grid { grid-template-columns: 1fr; } }
+  .visit-section__grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; }
+  @media (max-width: 900px) {
+    .visit-section__grid { grid-template-columns: 1fr; }
+    .visit-section__map { height: 400px; }
+  }
   .visit-section__copy { padding: clamp(40px, 6vw, 80px); display: flex; flex-direction: column; justify-content: center; gap: 24px; }
   .visit-section__copy h2 em { color: var(--green); }
-  .visit-section__map { position: relative; min-height: 400px; height: 100%; }
+  .visit-section__map { position: relative; }
+  .visit-section__map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
   .visit-section__map .ph { position: absolute; inset: 0; }
   .pin-marker { position: absolute; top: 45%; left: 50%; transform: translate(-50%,-100%); }
   .pin-marker__card { background: var(--paper); padding: 14px 18px; box-shadow: 0 8px 24px rgba(46,63,46,0.2); }
@@ -82,13 +86,7 @@
   .faq__item[open] summary::after { transform: rotate(45deg); }
   .faq__item p { padding-top: 18px; font-size: 15px; line-height: 1.7; color: var(--ink-soft); max-width: 720px; }
 
-  /* mini-strip */
-  .mini-strip { background: var(--wine); color: var(--cream); padding: 40px 0; }
-  .mini-strip__grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; align-items: center; }
-  @media (max-width: 800px) { .mini-strip__grid { grid-template-columns: 1fr; text-align:center; } }
-  .mini-strip h3 { font-size: clamp(20px, 2.4vw, 28px); font-weight: 700; line-height: 1.2; }
-  .mini-strip h3 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--gold-soft); }
-  .mini-strip p { font-size: 14px; opacity: 0.85; line-height: 1.5; }
+
 </style>
 </head>
 <body>
@@ -269,15 +267,6 @@
   </div>
 </section>
 
-<!-- MINI STRIP -->
-<section class="mini-strip">
-  <div class="container mini-strip__grid">
-    <h3>Imprensa, restaurantes<br>e <em>revendas?</em></h3>
-    <p>Atendemos compras em quantidade com tabela diferenciada para restaurantes, hotéis, lojas especializadas e clubes de vinho.</p>
-    <a href="mailto:sitiorosadovale@gmail.com?subject=Contato%20B2B" class="btn btn-outline-light" style="justify-self:end;">Falar com B2B →</a>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section class="faq">
   <div class="container">
@@ -336,7 +325,6 @@
     <div class="footer-bottom">
       <span>© <span data-year>2026</span> Sítio Rosa do Vale · CNPJ 00.000.000/0001-00</span>
       <span>Bebida alcoólica · Aprecie com moderação</span>
-      <span>Site refeito com carinho · v1.0</span>
     </div>
   </div>
 </footer>

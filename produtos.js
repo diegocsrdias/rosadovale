@@ -616,7 +616,7 @@ const PRODUTOS = [
     category: 'katats',
     subcategory: 'Vinho em Lata',
     price: 228,
-    img: 'Imagens/Katats.png',
+    img: 'Imagens/Katats 12un.png',
     bottleClass: 'bottle-branco',
     volume: '12 × 269ml',
     uvas: 'Vinho branco fino',
