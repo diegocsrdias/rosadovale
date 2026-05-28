@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato — Sítio Rosa do Vale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .contato-hero { background: var(--green-deep); color: var(--cream); padding: clamp(80px, 12vw, 160px) 0 clamp(60px, 10vw, 120px); position: relative; overflow: hidden; }
+  .contato-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(900px 500px at 10% 30%, rgba(201,169,97,0.15), transparent 60%); }
+  .contato-hero__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; position: relative; z-index: 1; }
+  @media (max-width: 900px) { .contato-hero__grid { grid-template-columns: 1fr; gap: 32px; } }
+  .contato-hero h1 { font-size: clamp(44px, 7vw, 96px); font-weight: 700; line-height: 0.95; letter-spacing: -0.03em; text-transform: uppercase; }
+  .contato-hero h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--gold-soft); text-transform: none; letter-spacing: 0; }
+  .contato-hero p { font-size: 17px; line-height: 1.6; color: rgba(245,241,232,0.85); max-width: 480px; }
+  .contato-hero .eyebrow { color: var(--gold-soft); display:block; margin-bottom: 18px; }
+
+  .contact-block { padding: clamp(60px, 9vw, 100px) 0; background: var(--cream); }
+  .contact-block__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start; }
+  @media (max-width: 900px) { .contact-block__grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  .contact-form { background: var(--paper); padding: 48px; }
+  .contact-form h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 8px; }
+  .contact-form h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--green); }
+  .contact-form > p { font-size: 14px; color: var(--ink-soft); margin-bottom: 32px; }
+
+  /* Direct contact list */
+  .direct { display: flex; flex-direction: column; gap: 16px; }
+  .direct__item {
+    background: var(--cream-light);
+    padding: 28px;
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    transition: background 0.2s;
+  }
+  .direct__item:hover { background: var(--paper); }
+  .direct__icon {
+    width: 56px; height: 56px; background: var(--green-deep); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .direct__icon svg { width: 22px; height: 22px; }
+  .direct__body h3 { font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
+  .direct__body p { font-size: 14px; color: var(--ink-soft); line-height: 1.4; }
+  .direct__body strong { color: var(--ink); font-weight: 700; }
+  .direct__action { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--green); border-bottom: 1px solid var(--green); padding-bottom: 2px; }
+
+  /* Hours table */
+  .hours { background: var(--green); color: var(--cream); padding: 32px; margin-top: 24px; }
+  .hours h3 { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; margin-bottom: 18px; color: var(--gold-soft); }
+  .hours__row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(245,241,232,0.18); font-size: 14px; }
+  .hours__row:last-child { border-bottom: none; }
+  .hours__row strong { font-weight: 600; }
+
+  /* Visit / map */
+  .visit-section { background: var(--paper); padding: 0; }
+  .visit-section__grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 540px; }
+  @media (max-width: 900px) { .visit-section__grid { grid-template-columns: 1fr; } }
+  .visit-section__copy { padding: clamp(40px, 6vw, 80px); display: flex; flex-direction: column; justify-content: center; gap: 24px; }
+  .visit-section__copy h2 em { color: var(--green); }
+  .visit-section__map { position: relative; min-height: 400px; }
+  .visit-section__map .ph { position: absolute; inset: 0; }
+  .pin-marker { position: absolute; top: 45%; left: 50%; transform: translate(-50%,-100%); }
+  .pin-marker__card { background: var(--paper); padding: 14px 18px; box-shadow: 0 8px 24px rgba(46,63,46,0.2); }
+  .pin-marker__card strong { font-size: 13px; display: block; }
+  .pin-marker__card span { font-size: 11px; color: var(--ink-muted); }
+  .pin-dot { width: 22px; height: 22px; background: var(--wine); border-radius: 50%; margin: 8px auto 0; border: 4px solid var(--cream); }
+
+  /* FAQ */
+  .faq { padding: clamp(60px, 9vw, 120px) 0; background: var(--cream); }
+  .faq__list { display: flex; flex-direction: column; gap: 0; max-width: 880px; margin: 0 auto; }
+  .faq__item { border-top: 1px solid var(--line); padding: 28px 0; }
+  .faq__item:last-child { border-bottom: 1px solid var(--line); }
+  .faq__item summary { font-size: clamp(18px, 2vw, 22px); font-weight: 600; letter-spacing: -0.005em; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__item summary::after { content: "+"; font-family: var(--serif); font-size: 32px; font-weight: 400; color: var(--green); transition: transform 0.3s; line-height: 1; }
+  .faq__item[open] summary::after { transform: rotate(45deg); }
+  .faq__item p { padding-top: 18px; font-size: 15px; line-height: 1.7; color: var(--ink-soft); max-width: 720px; }
+
+  /* mini-strip */
+  .mini-strip { background: var(--wine); color: var(--cream); padding: 40px 0; }
+  .mini-strip__grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; align-items: center; }
+  @media (max-width: 800px) { .mini-strip__grid { grid-template-columns: 1fr; text-align:center; } }
+  .mini-strip h3 { font-size: clamp(20px, 2.4vw, 28px); font-weight: 700; line-height: 1.2; }
+  .mini-strip h3 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--gold-soft); }
+  .mini-strip p { font-size: 14px; opacity: 0.85; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<!-- AGE MODAL -->
+<div class="age-modal" data-age-modal hidden>
+  <div class="age-card">
+    <div class="age-card__mark brand-mark"><span class="brand-mark__top">ROSA DO VALE</span><span class="brand-mark__sub">vinhos & espumantes</span></div>
+    <h2>Você tem 18 anos ou mais?</h2>
+    <p>Este site contém produtos com teor alcoólico. Para entrar, confirme que você é maior de idade.</p>
+    <div class="age-card__actions"><button class="btn btn-primary" data-age-yes>Sim, tenho 18+</button><button class="btn btn-outline" data-age-no>Não tenho</button></div>
+    <p class="age-card__legal">Bebida alcoólica. Aprecie com moderação.</p>
+  </div>
+</div>
+
+<!-- BOTTLE SYMBOL (still useful even if not used) -->
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <symbol id="bottle" viewBox="0 0 120 360">
+    <path d="M48 4 L72 4 L72 70 Q72 84 86 100 Q100 116 100 140 L100 340 Q100 356 84 356 L36 356 Q20 356 20 340 L20 140 Q20 116 34 100 Q48 84 48 70 Z" fill="var(--bottle-glass, #2e3f2e)"/>
+    <rect x="22" y="180" width="76" height="130" fill="var(--bottle-label, #faf7f0)"/>
+  </symbol>
+</svg>
+
+<div class="promo-bar"><span>Frete grátis Sul e Sudeste acima de R$ 400</span><span>Centro-Oeste, Norte e Nordeste acima de R$ 500</span></div>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <nav class="site-nav">
+      <a href="index.html">Início</a>
+      <a href="sobre.html">Sobre o sítio</a>
+      <a href="loja.html">Loja</a>
+      <a href="contato.html" class="active">Contato</a>
+    </nav>
+    <a href="index.html" class="brand-mark"><span class="brand-mark__top">ROSA DO VALE</span><span class="brand-mark__sub">vinhos & espumantes</span></a>
+    <div class="site-tools">
+      <button class="tool-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
+      <a href="conta.html" class="tool-link">Entrar</a>
+      <span class="tool-divider"></span>
+      <a href="carrinho.html" class="tool-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h2l3 12h11l3-8H7"/><circle cx="9" cy="21" r="1.4"/><circle cx="18" cy="21" r="1.4"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<!-- CONTATO HERO -->
+<section class="contato-hero">
+  <div class="container contato-hero__grid">
+    <div>
+      <span class="eyebrow">Fale com a gente</span>
+      <h1>A gente<br>atende como<br><em>família.</em></h1>
+    </div>
+    <div>
+      <p>Tem dúvida sobre um vinho, sobre um pedido, ou quer agendar uma visita ao sítio? Manda mensagem. Quem responde é a Helena, no WhatsApp — ou alguém da família, no e-mail. Geralmente em até 2 horas no horário comercial.</p>
+      <div style="display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;">
+        <a href="https://wa.me/555195867921" class="btn btn-green">WhatsApp · (51) 9586-7921</a>
+        <a href="mailto:sitiorosadovale@gmail.com" class="btn btn-outline-light">Enviar e-mail</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT BLOCK -->
+<section class="contact-block">
+  <div class="container contact-block__grid">
+
+    <!-- FORM -->
+    <form class="contact-form" onsubmit="event.preventDefault(); this.querySelector('button[type=submit]').textContent='Mensagem enviada ✓'">
+      <h2>Mande uma <em class="serif">mensagem.</em></h2>
+      <p>Tempo médio de resposta: 2 horas em dias úteis · 1 dia útil aos fins de semana.</p>
+
+      <div class="form-grid">
+        <div class="field"><label class="field__label">Seu nome</label><input class="input" type="text" placeholder="Como podemos te chamar?"></div>
+        <div class="field"><label class="field__label">E-mail</label><input class="input" type="email" placeholder="seu@email.com"></div>
+        <div class="field field--full">
+          <label class="field__label">Sobre o que você quer falar?</label>
+          <select class="select">
+            <option>Dúvida sobre um produto</option>
+            <option>Acompanhar pedido / pagamento</option>
+            <option>Agendar visita ao sítio</option>
+            <option>Compra em quantidade / B2B</option>
+            <option>Imprensa &amp; parcerias</option>
+            <option>Outro assunto</option>
+          </select>
+        </div>
+        <div class="field field--full">
+          <label class="field__label">Sua mensagem</label>
+          <textarea class="textarea" placeholder="Conta pra gente o que você precisa…"></textarea>
+        </div>
+        <div class="field field--full">
+          <label class="check"><input type="checkbox" checked>Aceito a política de privacidade e o uso dos meus dados para retorno.</label>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;">
+        <button type="submit" class="btn btn-green">Enviar mensagem</button>
+        <a href="https://wa.me/555195867921" class="btn btn-outline">Prefiro WhatsApp →</a>
+      </div>
+    </form>
+
+    <!-- DIRECT -->
+    <div>
+      <div class="direct">
+        <a class="direct__item" href="https://wa.me/555195867921">
+          <div class="direct__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21l1.6-4.4A8 8 0 1112 20a8 8 0 01-3.6-.8L3 21z"/></svg></div>
+          <div class="direct__body">
+            <h3>WhatsApp</h3>
+            <p><strong>(51) 9586-7921</strong><br>Atendimento direto · seg–sex 09h–19h</p>
+          </div>
+          <span class="direct__action">Chamar →</span>
+        </a>
+
+        <a class="direct__item" href="tel:5137731435">
+          <div class="direct__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 17v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1 1 .3 2 .6 2.9a2 2 0 01-.5 2.1L7.9 10a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.9.5 2.9.6a2 2 0 011.8 2z"/></svg></div>
+          <div class="direct__body">
+            <h3>Telefone</h3>
+            <p><strong>(51) 3773-1435</strong><br>Loja da fazenda · seg–sex 09h–19h</p>
+          </div>
+          <span class="direct__action">Ligar →</span>
+        </a>
+
+        <a class="direct__item" href="mailto:sitiorosadovale@gmail.com">
+          <div class="direct__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14"/><path d="M3 7l9 6 9-6"/></svg></div>
+          <div class="direct__body">
+            <h3>E-mail</h3>
+            <p><strong>sitiorosadovale@gmail.com</strong><br>Resposta em até 24h em dias úteis</p>
+          </div>
+          <span class="direct__action">E-mail →</span>
+        </a>
+
+        <a class="direct__item" href="https://www.instagram.com/sitiorosadovale">
+          <div class="direct__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg></div>
+          <div class="direct__body">
+            <h3>Instagram</h3>
+            <p><strong>@sitiorosadovale</strong><br>Fotos da parreira, safras e bastidores</p>
+          </div>
+          <span class="direct__action">Seguir →</span>
+        </a>
+      </div>
+
+      <div class="hours">
+        <h3>Horários de atendimento</h3>
+        <div class="hours__row"><span>Segunda a Sexta</span><strong>09h às 12h · 14h às 19h</strong></div>
+        <div class="hours__row"><span>Sábados &amp; Domingos</span><strong>Visitas com agendamento</strong></div>
+        <div class="hours__row"><span>Feriados</span><strong>Fechado</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP / VISIT -->
+<section class="visit-section">
+  <div class="container-wide">
+    <div class="visit-section__grid">
+      <div class="visit-section__copy">
+        <span class="eyebrow">Onde estamos</span>
+        <h2 class="h-2">Sítio Rosa do Vale<br><em class="serif">Poço das Antas — RS.</em></h2>
+        <p style="font-size:15px; line-height:1.7; color:var(--ink-soft); max-width:480px;">A gente fica na serra gaúcha, a 90 km de Porto Alegre. Tem placa na estrada e estacionamento na frente da casa. Bata na porta — a Dona Zilda atende.</p>
+
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:14px; margin-top:8px;">
+          <li style="display:flex; gap:14px; font-size:14px; color:var(--ink-soft); padding-bottom:14px; border-bottom:1px solid var(--line);"><strong style="min-width:110px; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink);">Endereço</strong>Rua 10 de Novembro · s/n · Centro · Poço das Antas — RS · CEP 95740-000</li>
+          <li style="display:flex; gap:14px; font-size:14px; color:var(--ink-soft); padding-bottom:14px; border-bottom:1px solid var(--line);"><strong style="min-width:110px; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink);">De Porto Alegre</strong>BR-386 sentido Norte · 90 km · ±1h20 de carro</li>
+          <li style="display:flex; gap:14px; font-size:14px; color:var(--ink-soft); padding-bottom:14px; border-bottom:1px solid var(--line);"><strong style="min-width:110px; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink);">Estacionamento</strong>Gratuito · ao lado da cantina</li>
+        </ul>
+
+        <div style="display:flex; gap:12px;">
+          <a href="#" class="btn btn-green">Como chegar — Google Maps</a>
+          <a href="https://wa.me/555195867921" class="btn btn-outline">Agendar visita</a>
+        </div>
+      </div>
+      <div class="visit-section__map">
+        <div class="ph ph--cream" style="height:100%;">
+          <span class="ph__label">[ mapa interativo · serra gaúcha ]</span>
+        </div>
+        <div class="pin-marker">
+          <div class="pin-marker__card">
+            <strong>Sítio Rosa do Vale</strong>
+            <span>Poço das Antas · RS</span>
+          </div>
+          <div class="pin-dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MINI STRIP -->
+<section class="mini-strip">
+  <div class="container mini-strip__grid">
+    <h3>Imprensa, restaurantes<br>e <em>revendas?</em></h3>
+    <p>Atendemos compras em quantidade com tabela diferenciada para restaurantes, hotéis, lojas especializadas e clubes de vinho.</p>
+    <a href="mailto:sitiorosadovale@gmail.com?subject=Contato%20B2B" class="btn btn-outline-light" style="justify-self:end;">Falar com B2B →</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div class="section-head" style="justify-content:center; text-align:center; flex-direction:column; gap:14px; align-items:center; max-width:680px; margin: 0 auto 56px; border:none;">
+      <span class="eyebrow">Antes de mandar mensagem</span>
+      <h2 class="h-2">Perguntas que aparecem<br><em class="serif" style="color:var(--green);">com frequência.</em></h2>
+    </div>
+
+    <div class="faq__list">
+      <details class="faq__item" open>
+        <summary>Vocês entregam em todo o Brasil?</summary>
+        <p>Sim, entregamos para todos os estados. Para Sul e Sudeste, o frete é grátis acima de R$ 400. Para Centro-Oeste, Norte e Nordeste, o frete é grátis acima de R$ 500. Abaixo desses valores, o valor é calculado pelo CEP no checkout.</p>
+      </details>
+      <details class="faq__item">
+        <summary>Quanto tempo demora pra chegar?</summary>
+        <p>O envio sai em até 2 dias úteis após a confirmação do pagamento. A partir daí, o prazo de transporte depende do CEP: Sul e Sudeste geralmente em 3 a 6 dias úteis; outras regiões em 5 a 12 dias úteis pelos Correios.</p>
+      </details>
+      <details class="faq__item">
+        <summary>Como pago? Tem PIX?</summary>
+        <p>Sim. Aceitamos PIX (com 10% de desconto), cartão de crédito em até 6× sem juros (Visa, Master, Elo e Amex) e boleto bancário à vista.</p>
+      </details>
+      <details class="faq__item">
+        <summary>E se a garrafa chegar quebrada?</summary>
+        <p>A gente reenvia, sem custo. É só mandar uma foto pelo WhatsApp em até 7 dias após o recebimento e a gente cuida do reenvio direto.</p>
+      </details>
+      <details class="faq__item">
+        <summary>Posso visitar o sítio?</summary>
+        <p>Pode e queremos que venha. A loja da fazenda atende de segunda a sexta, das 9h às 12h e das 14h às 19h, sem agendamento. Visitas guiadas com degustação acontecem aos sábados e domingos, com agendamento prévio pelo WhatsApp.</p>
+      </details>
+      <details class="faq__item">
+        <summary>Vocês vendem para restaurantes / revendas?</summary>
+        <p>Sim, temos tabela específica para B2B. Mande um e-mail para sitiorosadovale@gmail.com com o assunto "Contato B2B" que retornamos com a tabela completa em até 1 dia útil.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-mark"><span class="brand-mark__top">ROSA DO VALE</span><span class="brand-mark__sub">vinhos &amp; espumantes</span></div>
+        <p class="footer-tag">"Vinho de família, feito com o cuidado de sempre."</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/sitiorosadovale"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg></a>
+          <a href="https://www.facebook.com/sitiorosadovale"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 9V6.5a1.5 1.5 0 011.5-1.5H17V2h-2.5A4.5 4.5 0 0010 6.5V9H7v3h3v10h4V12h2.5l.5-3H14z"/></svg></a>
+          <a href="https://www.tiktok.com/@sitio.rosa.do.val"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.5 7.5a5 5 0 01-4-2v9.4a4.6 4.6 0 11-4.6-4.6c.3 0 .6 0 .9.1v3a1.6 1.6 0 101.1 1.5V2.5h2.7a5 5 0 003.9 4.4v.6z"/></svg></a>
+          <a href="https://api.whatsapp.com/message/KKW2J4B2ZCNXG1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21l1.6-4.4A8 8 0 1112 20a8 8 0 01-3.6-.8L3 21z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Loja</h4><ul><li><a href="loja.html?cat=espumantes">Espumantes</a></li><li><a href="loja.html?cat=vinhos">Vinhos</a></li><li><a href="loja.html?cat=sucos">Sucos integrais</a></li><li><a href="loja.html?cat=kits">Kits e presentes</a></li><li><a href="loja.html">Ver todos</a></li></ul></div>
+      <div class="footer-col"><h4>Atendimento</h4><ul><li><a href="sobre.html">Sobre o sítio</a></li><li><a href="contato.html">Contato</a></li><li><a href="politicas.html">Entrega e prazos</a></li><li><a href="politicas.html#troca">Trocas e devoluções</a></li><li><a href="politicas.html#privacidade">Política de privacidade</a></li></ul></div>
+      <div class="footer-col"><h4>Onde nos achar</h4><ul><li>Rua 10 de Novembro<br>Poço das Antas — RS<br>95740-000</li><li><a href="tel:5137731435">(51) 3773-1435</a></li><li><a href="https://wa.me/555195867921">WhatsApp · (51) 95867921</a></li><li><a href="mailto:sitiorosadovale@gmail.com">sitiorosadovale@gmail.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Sítio Rosa do Vale · CNPJ 00.000.000/0001-00</span>
+      <span>Bebida alcoólica · Aprecie com moderação</span>
+      <span>Site refeito com carinho · v1.0</span>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js" defer></script>
+</body>
+</html>

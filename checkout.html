@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finalizar compra — Sítio Rosa do Vale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { background: var(--cream); }
+
+  /* Slim header for checkout */
+  .checkout-header { background: var(--cream); border-bottom: 1px solid var(--line); }
+  .checkout-header__inner { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+  .secure { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-deep); font-weight: 700; }
+  .secure svg { width: 16px; height: 16px; color: var(--green); }
+
+  .checkout { padding: clamp(40px, 6vw, 80px) 0 clamp(60px, 9vw, 100px); }
+  .checkout__steps { display: flex; gap: 24px; padding-bottom: 32px; margin-bottom: 56px; border-bottom: 1px solid var(--line); }
+  .step { display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: var(--ink-muted); }
+  .step__num { width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--ink-muted); display: flex; align-items: center; justify-content: center; font-size: 11px; }
+  .step.done { color: var(--green-deep); }
+  .step.done .step__num { background: var(--green-soft); color: var(--green-deep); border-color: var(--green); }
+  .step.active { color: var(--ink); }
+  .step.active .step__num { background: var(--green-deep); color: var(--cream); border-color: var(--green-deep); }
+  .step__sep { flex: 0 0 40px; height: 1px; background: var(--line); }
+
+  .checkout__grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: start; }
+  @media (max-width: 900px) { .checkout__grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  .ck-block { padding: 36px; background: var(--paper); margin-bottom: 24px; }
+  .ck-block__head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 18px; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
+  .ck-block__head h3 { font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+  .ck-block__head h3 .num {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--green-deep); color: var(--cream);
+    display: inline-flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0;
+  }
+  .ck-block__edit { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--green); border-bottom: 1px solid var(--green); padding-bottom: 2px; }
+
+  /* Payment options */
+  .pay-method { display: flex; flex-direction: column; gap: 12px; }
+  .pay-option {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 20px;
+    border: 1px solid var(--line); background: var(--cream-light);
+    cursor: pointer;
+    transition: border 0.2s, background 0.2s;
+  }
+  .pay-option.active { border-color: var(--green); background: var(--paper); }
+  .pay-option input { appearance: none; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--ink); margin: 0; cursor: pointer; position: relative; }
+  .pay-option input:checked { border-color: var(--green); }
+  .pay-option input:checked::after { content: ""; position: absolute; inset: 4px; background: var(--green); border-radius: 50%; }
+  .pay-option__icon { width: 44px; height: 44px; background: var(--cream-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .pay-option__icon svg { width: 22px; height: 22px; color: var(--ink); }
+  .pay-option__body { flex: 1; }
+  .pay-option h4 { font-size: 14px; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 4px; }
+  .pay-option p { font-size: 12px; color: var(--ink-soft); }
+  .pay-option__discount { background: var(--green); color: var(--cream); padding: 4px 10px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+
+  /* Pix preview */
+  .pix-preview { padding: 24px; background: var(--cream-soft); margin-top: 16px; display: grid; grid-template-columns: 160px 1fr; gap: 24px; }
+  @media (max-width: 600px) { .pix-preview { grid-template-columns: 1fr; } }
+  .pix-qr { aspect-ratio: 1; background: var(--paper); display: flex; align-items: center; justify-content: center; position: relative; }
+  .pix-qr::before {
+    content: ""; position: absolute; inset: 12px;
+    background:
+      repeating-conic-gradient(var(--ink) 0% 25%, transparent 25% 50%) 50% 50% / 16px 16px,
+      repeating-linear-gradient(0deg, var(--ink) 0 4px, transparent 4px 8px),
+      repeating-linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 8px);
+    background-blend-mode: multiply;
+    opacity: 0.9;
+  }
+  .pix-qr::after {
+    content: ""; position: absolute; width: 30px; height: 30px;
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+    background: var(--green); border: 4px solid var(--paper);
+  }
+  .pix-info h4 { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+  .pix-info p { font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 12px; }
+  .pix-info code { display: block; padding: 12px; background: var(--paper); font-family: var(--mono); font-size: 11px; letter-spacing: 0; word-break: break-all; color: var(--ink); }
+
+  /* Order review */
+  .review { background: var(--cream-light); padding: 32px; position: sticky; top: 110px; }
+  .review h3 { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--ink); }
+  .review__line { display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: center; }
+  .review__media { aspect-ratio: 1; background: var(--cream-soft); display: flex; align-items: center; justify-content: center; }
+  .review__media svg { height: 80%; }
+  .review__name { font-size: 13px; font-weight: 500; line-height: 1.3; }
+  .review__qty { font-size: 11px; color: var(--ink-muted); margin-top: 2px; }
+  .review__price { font-size: 13px; font-weight: 700; }
+  .review__row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; color: var(--ink-soft); }
+  .review__row strong { color: var(--ink); }
+  .review__total { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); margin: 16px 0; }
+  .review__total-label { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+  .review__total-value { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+
+  /* Address radio cards */
+  .addr-list { display: flex; flex-direction: column; gap: 12px; }
+  .addr-card { padding: 18px 20px; border: 1px solid var(--line); background: var(--cream-light); display: grid; grid-template-columns: 24px 1fr auto; gap: 14px; align-items: center; cursor: pointer; }
+  .addr-card.active { border-color: var(--green); background: var(--paper); }
+  .addr-card input { appearance: none; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--ink); margin: 0; position: relative; cursor: pointer; }
+  .addr-card input:checked { border-color: var(--green); }
+  .addr-card input:checked::after { content: ""; position: absolute; inset: 4px; background: var(--green); border-radius: 50%; }
+  .addr-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .addr-card p { font-size: 12px; color: var(--ink-soft); }
+  .addr-card__tag { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); font-weight: 700; }
+
+  /* Shipping options */
+  .ship-list { display: flex; flex-direction: column; gap: 10px; }
+  .ship-card { padding: 16px 20px; border: 1px solid var(--line); display: grid; grid-template-columns: 24px 1fr auto; gap: 14px; align-items: center; cursor: pointer; }
+  .ship-card.active { border-color: var(--green); background: var(--cream-light); }
+  .ship-card input { appearance: none; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--ink); margin: 0; position: relative; cursor: pointer; }
+  .ship-card input:checked { border-color: var(--green); }
+  .ship-card input:checked::after { content: ""; position: absolute; inset: 4px; background: var(--green); border-radius: 50%; }
+  .ship-card h4 { font-size: 13px; font-weight: 700; }
+  .ship-card p { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .ship-card__price { font-size: 14px; font-weight: 700; }
+  .ship-card__price small { color: var(--green); font-weight: 600; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<!-- AGE MODAL -->
+<div class="age-modal" data-age-modal hidden>
+  <div class="age-card">
+    <div class="age-card__mark brand-mark"><span class="brand-mark__top">ROSA DO VALE</span><span class="brand-mark__sub">vinhos & espumantes</span></div>
+    <h2>Você tem 18 anos ou mais?</h2>
+    <p>Este site contém produtos com teor alcoólico. Para entrar, confirme que você é maior de idade.</p>
+    <div class="age-card__actions"><button class="btn btn-primary" data-age-yes>Sim, tenho 18+</button><button class="btn btn-outline" data-age-no>Não tenho</button></div>
+    <p class="age-card__legal">Bebida alcoólica. Aprecie com moderação.</p>
+  </div>
+</div>
+
+<!-- BOTTLE SYMBOL -->
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <symbol id="bottle" viewBox="0 0 120 360">
+    <path d="M48 4 L72 4 L72 70 Q72 84 86 100 Q100 116 100 140 L100 340 Q100 356 84 356 L36 356 Q20 356 20 340 L20 140 Q20 116 34 100 Q48 84 48 70 Z" fill="var(--bottle-glass, #2e3f2e)"/>
+    <path d="M72 70 Q72 84 86 100 Q100 116 100 140 L100 340 Q100 356 84 356 L74 356 L74 100 Z" fill="var(--bottle-glass-2, #1a1f1a)" opacity="0.45"/>
+    <rect x="44" y="0" width="32" height="58" fill="var(--bottle-cap, #1a1f1a)"/>
+    <rect x="22" y="180" width="76" height="130" fill="var(--bottle-label, #faf7f0)"/>
+    <text x="60" y="206" text-anchor="middle" font-family="Helvetica" font-size="8" font-weight="700" letter-spacing="2" fill="#1a1f1a">ROSA DO VALE</text>
+    <text x="60" y="245" text-anchor="middle" font-family="Georgia" font-size="20" font-style="italic" fill="#1a1f1a">2024</text>
+  </symbol>
+</svg>
+
+<!-- SLIM HEADER -->
+<header class="checkout-header">
+  <div class="container checkout-header__inner">
+    <a href="index.html" class="brand-mark" style="align-items:flex-start;">
+      <span class="brand-mark__top" style="font-size:18px;">ROSA DO VALE</span>
+      <span class="brand-mark__sub" style="font-size:11px;">vinhos &amp; espumantes</span>
+    </a>
+    <span class="secure">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Conexão segura · SSL
+    </span>
+  </div>
+</header>
+
+<section class="checkout">
+  <div class="container">
+
+    <div style="display:flex; justify-content:space-between; align-items:end; padding-bottom:24px; margin-bottom: 32px; border-bottom:1px solid var(--line);">
+      <div>
+        <span class="eyebrow">Etapa 02 · entrega &amp; pagamento</span>
+        <h1 style="font-size:clamp(36px, 5vw, 56px); font-weight:700; line-height:1; letter-spacing:-0.02em; text-transform:uppercase; margin-top:12px;">Finalizar <em class="serif" style="color:var(--green); font-weight:400; text-transform:none; letter-spacing:0;">compra</em></h1>
+      </div>
+      <a href="carrinho.html" class="btn btn-ghost">← Voltar ao carrinho</a>
+    </div>
+
+    <div class="checkout__steps">
+      <span class="step done"><span class="step__num">✓</span> Carrinho</span>
+      <span class="step__sep"></span>
+      <span class="step active"><span class="step__num">2</span> Entrega &amp; pagamento</span>
+      <span class="step__sep"></span>
+      <span class="step"><span class="step__num">3</span> Confirmação</span>
+    </div>
+
+    <div class="checkout__grid">
+      <div>
+        <!-- BLOCK 1 — IDENTIFICATION -->
+        <div class="ck-block">
+          <div class="ck-block__head">
+            <h3><span class="num">1</span> Identificação</h3>
+            <a href="#" class="ck-block__edit">Já tenho conta · entrar</a>
+          </div>
+          <div class="form-grid">
+            <div class="field"><label class="field__label">Nome completo</label><input type="text" class="input" value="Helena Rosa"></div>
+            <div class="field"><label class="field__label">E-mail</label><input type="email" class="input" value="helena@email.com"></div>
+            <div class="field"><label class="field__label">CPF</label><input type="text" class="input" placeholder="000.000.000-00"></div>
+            <div class="field"><label class="field__label">Celular / WhatsApp</label><input type="text" class="input" placeholder="(00) 00000-0000"></div>
+            <div class="field field--full">
+              <label class="check"><input type="checkbox" checked>Quero receber atualizações sobre safras novas e promoções por e-mail.</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- BLOCK 2 — ADDRESS -->
+        <div class="ck-block">
+          <div class="ck-block__head">
+            <h3><span class="num">2</span> Endereço de entrega</h3>
+            <a href="#" class="ck-block__edit">+ Adicionar novo</a>
+          </div>
+
+          <div class="addr-list">
+            <label class="addr-card active">
+              <input type="radio" name="addr" checked>
+              <div>
+                <span class="addr-card__tag">Casa</span>
+                <h4>Helena Rosa</h4>
+                <p>Rua Felipe de Oliveira, 720 · ap 12 · Petrópolis<br>Porto Alegre — RS · 90630-000</p>
+              </div>
+            </label>
+            <label class="addr-card">
+              <input type="radio" name="addr">
+              <div>
+                <span class="addr-card__tag">Trabalho</span>
+                <h4>Helena Rosa</h4>
+                <p>Av. Independência, 88 · sala 401 · Independência<br>Porto Alegre — RS · 90035-070</p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- BLOCK 3 — SHIPPING -->
+        <div class="ck-block">
+          <div class="ck-block__head">
+            <h3><span class="num">3</span> Forma de envio</h3>
+            <span class="mono">CEP 90630-000</span>
+          </div>
+          <div class="ship-list">
+            <label class="ship-card active">
+              <input type="radio" name="ship" checked>
+              <div>
+                <h4>Sedex · Correios</h4>
+                <p>Chega em 3 dias úteis (até 31 de mai)</p>
+              </div>
+              <div class="ship-card__price">R$ 32,00</div>
+            </label>
+            <label class="ship-card">
+              <input type="radio" name="ship">
+              <div>
+                <h4>PAC · Correios</h4>
+                <p>Chega em 6 dias úteis (até 04 de jun)</p>
+              </div>
+              <div class="ship-card__price">R$ 24,00 <small style="display:block;">Econômico</small></div>
+            </label>
+            <label class="ship-card">
+              <input type="radio" name="ship">
+              <div>
+                <h4>Retirada no sítio · grátis</h4>
+                <p>Poço das Antas/RS · qualquer dia útil das 9h às 19h</p>
+              </div>
+              <div class="ship-card__price" style="color:var(--green);">R$ 0,00</div>
+            </label>
+          </div>
+        </div>
+
+        <!-- BLOCK 4 — PAYMENT -->
+        <div class="ck-block">
+          <div class="ck-block__head">
+            <h3><span class="num">4</span> Forma de pagamento</h3>
+          </div>
+
+          <div class="pay-method">
+            <label class="pay-option active">
+              <input type="radio" name="pay" checked>
+              <div class="pay-option__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L22 12L12 22L2 12L12 2Z"/></svg>
+              </div>
+              <div class="pay-option__body">
+                <h4>PIX <span class="pay-option__discount">-10%</span></h4>
+                <p>Aprovação na hora · pague pelo app do seu banco</p>
+              </div>
+            </label>
+
+            <div class="pix-preview">
+              <div class="pix-qr"></div>
+              <div class="pix-info">
+                <h4>Como pagar com PIX</h4>
+                <p>1. Abra o app do seu banco · 2. Escolha pagar com PIX · 3. Escaneie o QR Code ou copie o código abaixo.</p>
+                <code>00020126360014BR.GOV.BCB.PIX0114+5551958679210204000053039865406344.705802BR5919SITIO ROSA DO VALE6014POCO DAS ANTAS62070503***6304A1B2</code>
+                <button class="btn btn-outline" style="margin-top:14px; padding:10px 16px; font-size:11px;">Copiar código PIX</button>
+              </div>
+            </div>
+
+            <label class="pay-option">
+              <input type="radio" name="pay">
+              <div class="pay-option__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+              </div>
+              <div class="pay-option__body">
+                <h4>Cartão de crédito</h4>
+                <p>Até 6× sem juros · Visa, Master, Elo, Amex</p>
+              </div>
+            </label>
+
+            <label class="pay-option">
+              <input type="radio" name="pay">
+              <div class="pay-option__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16"/><path d="M7 4v16M11 4v16M15 4v16M19 4v16"/></svg>
+              </div>
+              <div class="pay-option__body">
+                <h4>Boleto bancário</h4>
+                <p>Compensação em 1 dia útil · à vista</p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <button class="btn btn-green btn-block btn-lg">Confirmar pedido — R$ 344,70 via PIX</button>
+        <p style="font-size:11px; text-align:center; color:var(--ink-muted); margin-top:14px; letter-spacing:0.06em;">Ao confirmar, você concorda com as <a href="politicas.html" style="border-bottom:1px solid var(--ink-muted);">políticas de troca e privacidade</a>.</p>
+      </div>
+
+      <!-- REVIEW -->
+      <aside>
+        <div class="review">
+          <h3>Resumo do pedido · 3 itens</h3>
+
+          <div class="review__line">
+            <div class="review__media"><svg class="bottle-svg bottle-rose" viewBox="0 0 120 360"><use href="#bottle"/></svg></div>
+            <div>
+              <div class="review__name">Espumante Natural Rosé Brut</div>
+              <div class="review__qty">Qtd 2 · 750ml</div>
+            </div>
+            <div class="review__price">R$ 196</div>
+          </div>
+          <div class="review__line">
+            <div class="review__media"><svg class="bottle-svg bottle-tinto" viewBox="0 0 120 360"><use href="#bottle"/></svg></div>
+            <div>
+              <div class="review__name">Cabernet Sauvignon Seco</div>
+              <div class="review__qty">Qtd 1 · 750ml</div>
+            </div>
+            <div class="review__price">R$ 120</div>
+          </div>
+          <div class="review__line">
+            <div class="review__media"><svg class="bottle-svg bottle-suco" viewBox="0 0 120 360"><use href="#bottle"/></svg></div>
+            <div>
+              <div class="review__name">Suco de Uva Tinto Integral</div>
+              <div class="review__qty">Qtd 1 · 1L</div>
+            </div>
+            <div class="review__price">R$ 35</div>
+          </div>
+
+          <div style="margin-top:18px;">
+            <div class="review__row"><span>Subtotal</span><strong>R$ 351,00</strong></div>
+            <div class="review__row"><span>Frete · Sedex</span><strong>R$ 32,00</strong></div>
+            <div class="review__row"><span>Desconto PIX (10%)</span><strong style="color:var(--green);">— R$ 38,30</strong></div>
+          </div>
+
+          <div class="review__total">
+            <div class="review__total-label">Total via PIX</div>
+            <div class="review__total-value">R$ 344<small style="font-size:14px; color:var(--ink-muted);">,70</small></div>
+          </div>
+
+          <div style="display:flex; gap:10px; align-items:center; font-size:11px; color:var(--green-deep); letter-spacing:0.06em;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            Economia de R$ 38,30 escolhendo PIX
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer style="background:var(--green-deep); color:var(--cream); padding:32px 0; margin-top:0;">
+  <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(245,241,232,0.7);">
+    <span>© <span data-year>2026</span> Sítio Rosa do Vale</span>
+    <span>Compra segura · SSL · Bebida alcoólica · Aprecie com moderação</span>
+    <span><a href="contato.html">Precisa de ajuda?</a></span>
+  </div>
+</footer>
+
+<script src="site.js" defer></script>
+</body>
+</html>
