@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="Imagens/logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contato — Sítio Rosa do Vale</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -121,7 +122,7 @@
       <a href="loja.html">Loja</a>
       <a href="contato.html" class="active">Contato</a>
     </nav>
-    <a href="index.html" class="brand-mark"><span class="brand-mark__top">ROSA DO VALE</span><span class="brand-mark__sub">vinhos & espumantes</span></a>
+    <a href="index.html" class="brand-mark"><img src="Imagens/logo.png" alt="S�tio Rosa do Vale" class="brand-mark__logo"><span class="brand-mark__top">ROSA DO VALE</span><span class="brand-mark__sub">vinhos & espumantes</span></a>
     <div class="site-tools">
       <button class="tool-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
       <a href="conta.html" class="tool-link">Entrar</a>
@@ -252,21 +253,17 @@
         </ul>
 
         <div style="display:flex; gap:12px;">
-          <a href="#" class="btn btn-green">Como chegar — Google Maps</a>
+          <a href="https://www.google.com/maps/place/S%C3%ADtio+Rosa+do+Vale/@-29.4228377,-51.6575741,17z/data=!3m1!4b1!4m6!3m5!1s0x951c136dec40f54f:0x6e6567530825e37!8m2!3d-29.4228378!4d-51.6527032!16s%2Fg%2F11sycd7ypx?entry=ttu&g_ep=EgoyMDI2MDUyNS4wIKXMDSoASAFQAw%3D%3D" class="btn btn-green" target="_blank" rel="noopener">Como chegar — Google Maps</a>
           <a href="https://wa.me/555195867921" class="btn btn-outline">Agendar visita</a>
         </div>
       </div>
       <div class="visit-section__map">
-        <div class="ph ph--cream" style="height:100%;">
-          <span class="ph__label">[ mapa interativo · serra gaúcha ]</span>
-        </div>
-        <div class="pin-marker">
-          <div class="pin-marker__card">
-            <strong>Sítio Rosa do Vale</strong>
-            <span>Poço das Antas · RS</span>
-          </div>
-          <div class="pin-dot"></div>
-        </div>
+        <iframe
+          class="visit-map-iframe"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3471.836!2d-51.6527032!3d-29.4228378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951c136dec40f54f%3A0x6e6567530825e37!2zU8OtdGlvIFJvc2EgZG8gVmFsZQ!5e0!3m2!1spt-BR!2sbr!4v1716829200000"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Sítio Rosa do Vale no Google Maps">
+        </iframe>
       </div>
     </div>
   </div>

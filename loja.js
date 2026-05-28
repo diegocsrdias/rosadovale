@@ -60,6 +60,9 @@
       const tagHTML = p.tag
         ? `<span class="product-card__tag" style="${p.tagStyle || ''}">${p.tag}</span>`
         : '';
+      const mediaInner = p.img
+        ? `<img class="prod-img" src="${p.img}" alt="${p.nameFull || p.name}" loading="lazy">`
+        : `<svg class="bottle-svg ${p.bottleClass}" viewBox="0 0 120 360"><use href="#bottle"/></svg>`;
       const metaLine = p.alcool && p.alcool !== '0%'
         ? `${p.uvas} · ${p.alcool}`
         : `${p.uvas} · sem álcool`;
@@ -68,7 +71,8 @@
         <a href="produto.html?id=${p.id}" class="product-card">
           <div class="product-card__media">
             ${tagHTML}
-            <svg class="bottle-svg ${p.bottleClass}" viewBox="0 0 120 360"><use href="#bottle"/></svg>
+            ${mediaInner}
+            <button class="card-ficha" data-ficha="${p.id}" aria-label="Ver ficha técnica">Ficha</button>
             <div class="product-card__quick">
               <div class="card-stepper is-zero" data-stepper data-product-id="${p.id}">
                 <button class="card-stepper__dn" aria-label="Remover">−</button>
@@ -136,6 +140,15 @@
           if (!item) return;
           if (item.qty <= 1) Cart.remove(id);
           else Cart.updateQty(id, item.qty - 1);
+        });
+      });
+
+      // Bind Ficha buttons
+      gridEl.querySelectorAll('[data-ficha]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          openFicha(btn.dataset.ficha);
         });
       });
     }

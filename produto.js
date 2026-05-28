@@ -25,9 +25,29 @@
     }
     if (bcName) bcName.textContent = produto.nameFull || produto.name;
 
-    /* ─── Gallery: bottle class ─── */
-    document.querySelectorAll('[data-bottle-svg]').forEach(el => {
-      el.className = `bottle-svg ${produto.bottleClass}`;
+    /* ─── Gallery: bottle class or real photo ─── */
+    const galleryMain = document.getElementById('gallery-main-img');
+    if (galleryMain) {
+      if (produto.img) {
+        galleryMain.src = produto.img;
+        galleryMain.alt = produto.nameFull || produto.name;
+        galleryMain.style.display = 'block';
+        // hide SVG bottles if any
+        document.querySelectorAll('[data-bottle-svg]').forEach(el => { el.style.display = 'none'; });
+      } else {
+        document.querySelectorAll('[data-bottle-svg]').forEach(el => {
+          el.className = `bottle-svg ${produto.bottleClass}`;
+        });
+      }
+    } else {
+      document.querySelectorAll('[data-bottle-svg]').forEach(el => {
+        el.className = `bottle-svg ${produto.bottleClass}`;
+      });
+    }
+
+    /* Ficha button on product page */
+    document.querySelectorAll('[data-ficha]').forEach(btn => {
+      btn.dataset.ficha = produto.id;
     });
 
     /* ─── Product info ─── */
@@ -53,7 +73,7 @@
     setText('prod-harmoniza', produto.harmoniza);
 
     /* ─── Tasting bars ─── */
-    setBar('bar-docura', produto.doçura);
+    setBar('bar-docura', produto.docura);
     setBar('bar-acidez', produto.acidez);
     setBar('bar-corpo', produto.corpo);
     setBar('bar-bolha', produto.bolha);
@@ -129,7 +149,11 @@
       relatedGrid.innerHTML = related.map(p => `
         <a href="produto.html?id=${p.id}" class="product-card">
           <div class="product-card__media">
-            <svg class="bottle-svg ${p.bottleClass}" viewBox="0 0 120 360"><use href="#bottle"/></svg>
+            ${p.img
+              ? `<img class="prod-img" src="${p.img}" alt="${p.nameFull || p.name}" loading="lazy">`
+              : `<svg class="bottle-svg ${p.bottleClass}" viewBox="0 0 120 360"><use href="#bottle"/></svg>`
+            }
+            <button class="card-ficha" data-ficha="${p.id}" aria-label="Ver ficha técnica">Ficha</button>
           </div>
           <div class="product-card__body">
             <span class="product-card__cat">${p.subcategory}</span>

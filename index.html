@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="Imagens/logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sítio Rosa do Vale — Vinhos, espumantes e sucos de uva artesanais</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,22 +21,7 @@
   }
   .hero__bg {
     position: absolute; inset: 0;
-    background:
-      linear-gradient(180deg, rgba(26,31,26,0.15) 0%, rgba(26,31,26,0.55) 70%, rgba(26,31,26,0.85) 100%),
-      repeating-linear-gradient(135deg, rgba(46,63,46,0.55) 0 14px, rgba(46,63,46,0.65) 14px 30px),
-      linear-gradient(160deg, #4a6a4a 0%, #2e3f2e 50%, #1a1f1a 100%);
-  }
-  .hero__bg::after {
-    content: "";
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(800px 400px at 70% 30%, rgba(201,169,97,0.18) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .hero__ph-label {
-    position: absolute;
-    top: 24px; left: 24px;
-    z-index: 2;
+    overflow: hidden;
   }
   .hero__inner {
     position: relative;
@@ -342,6 +328,7 @@
       <a href="contato.html">Contato</a>
     </nav>
     <a href="index.html" class="brand-mark" aria-label="Sítio Rosa do Vale - Início">
+      <img src="Imagens/logo.png" alt="Sítio Rosa do Vale" class="brand-mark__logo">
       <span class="brand-mark__top">ROSA DO VALE</span>
       <span class="brand-mark__sub">vinhos & espumantes</span>
     </a>
@@ -361,8 +348,10 @@
 
 <!-- =================== HERO =================== -->
 <section class="hero" style="padding:0;">
-  <div class="hero__bg" aria-hidden="true"></div>
-  <span class="ph__label hero__ph-label">[ foto · parreira ao entardecer · poço das antas ]</span>
+  <div class="hero__bg" aria-hidden="true">
+    <img class="hero__bg-img" src="Imagens/panorâmica da parreira · março 2024.png" alt="">
+    <div class="hero__bg-overlay"></div>
+  </div>
 
   <div class="hero__corner-mark">
     <span>LINHA BOA VISTA · POÇO DAS ANTAS · RS</span>
@@ -519,9 +508,7 @@
 <section class="story">
   <div class="container story__grid">
     <div class="story__media">
-      <div class="ph" style="height:100%;">
-        <span class="ph__label">[ foto · família na colheita · safra 2024 ]</span>
-      </div>
+      <img src="Imagens/foto · família na colheita · safra 2024.png" alt="Família Krindges na colheita · Safra 2024" class="section-photo">
       <div class="story__badge">
         <span>
           <strong>Sítio</strong>
@@ -652,18 +639,21 @@
 
     <div class="pairing-grid">
       <div class="pairing-card">
+        <img class="pairing-card__photo" src="Imagens/harmonização - Chardonnay Seco.png" alt="Harmonização com Chardonnay" loading="lazy">
         <span class="pairing-card__num">01 / 03</span>
         <span class="pairing-card__match">Vai bem com</span>
         <p class="pairing-card__body">Massas frescas, risoto de funghi, queijos brie e camembert, peixes de água doce na manteiga.</p>
         <h3 class="pairing-card__title"><em>Chardonnay</em> Seco</h3>
       </div>
       <div class="pairing-card">
+        <img class="pairing-card__photo" src="Imagens/harmonização - Cabernet Sauvignon.png" alt="Harmonização com Cabernet Sauvignon" loading="lazy">
         <span class="pairing-card__num">02 / 03</span>
         <span class="pairing-card__match">Vai bem com</span>
         <p class="pairing-card__body">Churrasco, costela na brasa, queijos curados, massas com molho de tomate, carnes de caça.</p>
         <h3 class="pairing-card__title"><em>Cabernet</em> Sauvignon</h3>
       </div>
       <div class="pairing-card">
+        <img class="pairing-card__photo" src="Imagens/harmonização - Espumante Brut.png" alt="Harmonização com Espumante Brut" loading="lazy">
         <span class="pairing-card__num">03 / 03</span>
         <span class="pairing-card__match">Vai bem com</span>
         <p class="pairing-card__body">Aperitivos, frutos do mar, ceviches, queijos frescos. Excelente também sozinho, bem gelado.</p>

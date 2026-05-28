@@ -276,3 +276,97 @@ document.querySelectorAll("[data-gallery]").forEach(g => {
   document.addEventListener("cart:updated", syncStickyCount);
   syncStickyCount();
 })();
+
+/* ═══════════════════════════════════════════
+   Ficha Técnica Modal — available on all pages
+═══════════════════════════════════════════ */
+(function () {
+  const MODAL_ID = 'ficha-modal';
+
+  function initModal() {
+    if (document.getElementById(MODAL_ID)) return; // already exists
+    const wrap = document.createElement('div');
+    wrap.innerHTML = `
+      <div id="${MODAL_ID}" class="ficha-overlay" hidden role="dialog" aria-modal="true" aria-label="Ficha técnica">
+        <div class="ficha-panel">
+          <button class="ficha-close" id="ficha-close-btn" aria-label="Fechar">×</button>
+          <div id="ficha-inner"></div>
+        </div>
+      </div>`;
+    document.body.appendChild(wrap.firstElementChild);
+
+    const modal    = document.getElementById(MODAL_ID);
+    const closeBtn = document.getElementById('ficha-close-btn');
+
+    closeBtn.addEventListener('click', closeFicha);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeFicha(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeFicha(); });
+  }
+
+  function openFicha(productId) {
+    initModal();
+    const modal = document.getElementById(MODAL_ID);
+    const inner = document.getElementById('ficha-inner');
+    const p = typeof getProduto === 'function' ? getProduto(productId) : null;
+    if (!p || !inner) return;
+
+    const chips = (p.harmonizacaoChips || [])
+      .map(c => `<span class="ficha-chip">${c}</span>`).join('');
+
+    const specs = [
+      { label: 'Uvas',        val: p.uvas },
+      { label: 'Álcool',      val: p.alcool },
+      { label: 'Temperatura', val: p.servico },
+      { label: 'Volume',      val: p.volume },
+      p.cor   ? { label: 'Cor',   val: p.cor   } : null,
+      p.aroma ? { label: 'Aroma', val: p.aroma } : null,
+      p.boca  ? { label: 'Boca',  val: p.boca  } : null,
+      p.safra ? { label: 'Safra', val: p.safra } : null,
+    ].filter(Boolean).map(s => `
+      <div class="ficha-spec">
+        <span class="ficha-spec__label">${s.label}</span>
+        <span class="ficha-spec__val">${s.val}</span>
+      </div>`).join('');
+
+    inner.innerHTML = `
+      ${p.img
+        ? `<img class="ficha-panel__img" src="${p.img}" alt="${p.nameFull || p.name}">`
+        : `<div class="ficha-panel__img-placeholder"><svg class="bottle-svg ${p.bottleClass}" viewBox="0 0 120 360"><use href="#bottle"/></svg></div>`
+      }
+      <div class="ficha-body">
+        <span class="ficha-body__cat">${p.subcategory} · ${p.category}</span>
+        <h2 class="ficha-body__name">${p.nameFull || p.name}</h2>
+        <div class="ficha-body__price">R$ ${p.price} <small style="font-size:14px;font-weight:400;color:var(--ink-soft)">/ ${p.volume}</small></div>
+        ${p.descricao ? `<p class="ficha-body__desc">${p.descricao}</p>` : ''}
+        <div class="ficha-specs">${specs}</div>
+        ${chips ? `<div class="ficha-chips">${chips}</div>` : ''}
+        <div class="ficha-actions">
+          <a href="produto.html?id=${p.id}" class="btn btn-outline">Ver produto completo</a>
+        </div>
+      </div>`;
+
+    modal.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('ficha-close-btn').focus();
+  }
+
+  function closeFicha() {
+    const modal = document.getElementById(MODAL_ID);
+    if (modal) modal.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+  }
+
+  /* Expose globally */
+  window.openFicha  = openFicha;
+  window.closeFicha = closeFicha;
+
+  /* Delegate: any [data-ficha] button on the page */
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-ficha]');
+    if (btn) {
+      e.preventDefault();
+      e.stopPropagation();
+      openFicha(btn.dataset.ficha);
+    }
+  });
+})();
