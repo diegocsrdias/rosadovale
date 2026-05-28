@@ -155,8 +155,9 @@
   .family { padding: clamp(80px, 10vw, 140px) 0; background: var(--cream); }
   .family__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(2, minmax(0, 360px));
+    gap: 40px;
+    justify-content: center;
   }
   @media (max-width: 900px) { .family__grid { grid-template-columns: 1fr 1fr; } }
   .person {
@@ -164,8 +165,9 @@
     flex-direction: column;
     gap: 14px;
   }
-  .person__photo { aspect-ratio: 4 / 5; position: relative; }
+  .person__photo { aspect-ratio: 4 / 5; position: relative; overflow: hidden; }
   .person__photo .ph { position: absolute; inset: 0; }
+  .person__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
   .person h4 { font-family: var(--serif); font-style: italic; font-size: 24px; font-weight: 400; color: var(--green-deep); margin-bottom: 2px; }
   .person p { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); }
 
@@ -427,33 +429,20 @@
 
     <div class="family__grid">
       <div class="person">
-        <div class="person__photo"><div class="ph ph--cream"><span class="ph__label">[ retrato · Irani Krindges ]</span></div></div>
+        <div class="person__photo"><img src="Imagens/Irani Krindges.png" alt="Irani Krindges"></div>
         <div>
           <h4>Irani</h4>
           <p>Fundador e lavrador · Família Krindges</p>
         </div>
       </div>
       <div class="person">
-        <div class="person__photo"><div class="ph"><span class="ph__label">[ retrato · Miriam Krindges ]</span></div></div>
+        <div class="person__photo"><img src="Imagens/Miriam Krindges.png" alt="Miriam Krindges"></div>
         <div>
           <h4>Miriam</h4>
           <p>Espósa e parceira no sítio</p>
         </div>
       </div>
-      <div class="person">
-        <div class="person__photo"><div class="ph ph--cream"><span class="ph__label">[ retrato · Maria ]</span></div></div>
-        <div>
-          <h4>Maria</h4>
-          <p>Mãe do Irani · memória da casa</p>
-        </div>
-      </div>
-      <div class="person">
-        <div class="person__photo"><div class="ph"><span class="ph__label">[ retrato · Dandara ]</span></div></div>
-        <div>
-          <h4>Dandara</h4>
-          <p>Filha · nova geração do sítio</p>
-        </div>
-      </div>
+
     </div>
   </div>
 </section>
