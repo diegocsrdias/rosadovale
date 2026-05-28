@@ -203,6 +203,7 @@
   .visit-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    height: 560px;
     min-height: 560px;
   }
   @media (max-width: 900px) { .visit-grid { grid-template-columns: 1fr; } }
@@ -214,7 +215,7 @@
     justify-content: center;
     gap: 24px;
   }
-  .visit-grid__map { position: relative; min-height: 400px; }
+  .visit-grid__map { position: relative; min-height: 400px; height: 100%; }
   .visit-grid__map .ph { position: absolute; inset: 0; }
   .visit-grid__pin {
     position: absolute;
@@ -548,7 +549,8 @@
     <div class="product-grid">
       <a href="produto.html?id=vinho-mesa-branco-moscato" class="product-card">
         <div class="product-card__media">
-          <svg class="bottle-svg bottle-branco" viewBox="0 0 120 360"><use href="#bottle"/></svg>
+          <img class="prod-img" src="Imagens/Vinho de Mesa branco Seco Moscato.png" alt="Vinho de Mesa Branco Seco Moscato" loading="lazy">
+          <button class="card-ficha" data-ficha="vinho-mesa-branco-moscato" aria-label="Ver ficha técnica">Ficha</button>
           <div class="product-card__quick"><div class="card-stepper is-zero" data-stepper data-product-id="vinho-mesa-branco-moscato"><button class="card-stepper__dn" aria-label="Remover">−</button><span class="card-stepper__n">0</span><button class="card-stepper__up" aria-label="Adicionar">Adicionar</button></div></div>
         </div>
         <div class="product-card__body">
@@ -565,7 +567,8 @@
       <a href="produto.html?id=vinho-fino-tinto-cabernet-sauvignon" class="product-card">
         <div class="product-card__media">
           <span class="product-card__tag tag-wine" style="background:var(--wine); color:var(--cream);">Reserva</span>
-          <svg class="bottle-svg bottle-tinto" viewBox="0 0 120 360"><use href="#bottle"/></svg>
+          <img class="prod-img" src="Imagens/Vinho Fino Tinto Seco Cabernet Sauvignon.png" alt="Vinho Fino Tinto Seco Cabernet Sauvignon" loading="lazy">
+          <button class="card-ficha" data-ficha="vinho-fino-tinto-cabernet-sauvignon" aria-label="Ver ficha técnica">Ficha</button>
           <div class="product-card__quick"><div class="card-stepper is-zero" data-stepper data-product-id="vinho-fino-tinto-cabernet-sauvignon"><button class="card-stepper__dn" aria-label="Remover">−</button><span class="card-stepper__n">0</span><button class="card-stepper__up" aria-label="Adicionar">Adicionar</button></div></div>
         </div>
         <div class="product-card__body">
@@ -581,7 +584,8 @@
 
       <a href="produto.html?id=vinho-fino-branco-moscato-alexandria" class="product-card">
         <div class="product-card__media">
-          <svg class="bottle-svg bottle-branco" viewBox="0 0 120 360"><use href="#bottle"/></svg>
+          <img class="prod-img" src="Imagens/Vinho Fino Branco Seco Moscato de Alexandria.png" alt="Vinho Fino Branco Seco Moscato de Alexandria" loading="lazy">
+          <button class="card-ficha" data-ficha="vinho-fino-branco-moscato-alexandria" aria-label="Ver ficha técnica">Ficha</button>
           <div class="product-card__quick"><div class="card-stepper is-zero" data-stepper data-product-id="vinho-fino-branco-moscato-alexandria"><button class="card-stepper__dn" aria-label="Remover">−</button><span class="card-stepper__n">0</span><button class="card-stepper__up" aria-label="Adicionar">Adicionar</button></div></div>
         </div>
         <div class="product-card__body">
@@ -597,7 +601,8 @@
 
       <a href="produto.html?id=vinho-fino-branco-chardonnay" class="product-card">
         <div class="product-card__media">
-          <svg class="bottle-svg bottle-branco" viewBox="0 0 120 360"><use href="#bottle"/></svg>
+          <img class="prod-img" src="Imagens/Vinho Fino Branco Seco Chardonnay.png" alt="Vinho Fino Branco Seco Chardonnay" loading="lazy">
+          <button class="card-ficha" data-ficha="vinho-fino-branco-chardonnay" aria-label="Ver ficha técnica">Ficha</button>
           <div class="product-card__quick"><div class="card-stepper is-zero" data-stepper data-product-id="vinho-fino-branco-chardonnay"><button class="card-stepper__dn" aria-label="Remover">−</button><span class="card-stepper__n">0</span><button class="card-stepper__up" aria-label="Adicionar">Adicionar</button></div></div>
         </div>
         <div class="product-card__body">
@@ -679,7 +684,8 @@
     <div class="product-grid product-grid--3">
       <a href="produto.html?id=suco-bergamota" class="product-card">
         <div class="product-card__media">
-          <svg class="bottle-svg bottle-laranja" viewBox="0 0 120 360"><use href="#bottle"/></svg>
+          <img class="prod-img" src="Imagens/Suco de Bergamota.png" alt="Suco de Bergamota" loading="lazy">
+          <button class="card-ficha" data-ficha="suco-bergamota" aria-label="Ver ficha técnica">Ficha</button>
           <div class="product-card__quick"><div class="card-stepper is-zero" data-stepper data-product-id="suco-bergamota"><button class="card-stepper__dn" aria-label="Remover">−</button><span class="card-stepper__n">0</span><button class="card-stepper__up" aria-label="Adicionar">Adicionar</button></div></div>
         </div>
         <div class="product-card__body">
@@ -696,7 +702,8 @@
       <a href="produto.html?id=suco-uva-tinto-integral" class="product-card">
         <div class="product-card__media">
           <span class="product-card__tag tag-gold" style="background:var(--gold); color:var(--ink);">100% uva</span>
-          <svg class="bottle-svg bottle-suco" viewBox="0 0 120 360"><use href="#bottle"/></svg>
+          <img class="prod-img" src="Imagens/Suco de Uva Tinto – Integral.png" alt="Suco de Uva Tinto Integral" loading="lazy">
+          <button class="card-ficha" data-ficha="suco-uva-tinto-integral" aria-label="Ver ficha técnica">Ficha</button>
           <div class="product-card__quick"><div class="card-stepper is-zero" data-stepper data-product-id="suco-uva-tinto-integral"><button class="card-stepper__dn" aria-label="Remover">−</button><span class="card-stepper__n">0</span><button class="card-stepper__up" aria-label="Adicionar">Adicionar</button></div></div>
         </div>
         <div class="product-card__body">
@@ -743,10 +750,12 @@
         </div>
       </div>
       <div class="visit-grid__map">
-        <div class="ph ph--cream" style="height:100%;">
-          <span class="ph__label">[ mapa · poço das antas · serra gaúcha ]</span>
-        </div>
-        <div class="visit-grid__pin">📍 Sítio Rosa do Vale</div>
+        <iframe
+          class="visit-map-iframe"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3471.836!2d-51.6527032!3d-29.4228378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951c136dec40f54f%3A0x6e6567530825e37!2zU8OtdGlvIFJvc2EgZG8gVmFsZQ!5e0!3m2!1spt-BR!2sbr!4v1716829200000"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Sítio Rosa do Vale no Google Maps">
+        </iframe>
       </div>
     </div>
   </div>
