@@ -245,7 +245,7 @@ section { padding: clamp(60px, 9vw, 140px) 0; }
 
 .site-header__inner {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   height: 86px;
   gap: 24px;
@@ -253,7 +253,9 @@ section { padding: clamp(60px, 9vw, 140px) 0; }
 
 .site-nav {
   display: flex;
-  gap: 36px;
+  justify-content: center;
+  order: 1;
+  gap: 28px;
   font-size: 12px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -287,6 +289,7 @@ section { padding: clamp(60px, 9vw, 140px) 0; }
   align-items: center;
   text-align: center;
   line-height: 1;
+  order: 0;
 }
 
 .brand-mark__top {
@@ -309,6 +312,7 @@ section { padding: clamp(60px, 9vw, 140px) 0; }
   justify-content: flex-end;
   align-items: center;
   gap: 18px;
+  order: 2;
 }
 
 .tool-btn {
