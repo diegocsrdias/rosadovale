@@ -249,6 +249,8 @@
     color: var(--cream);
     padding: clamp(60px, 8vw, 100px) 0;
     text-align: center;
+    position: relative;
+    z-index: 1;
   }
   .newsletter__inner { max-width: 720px; margin: 0 auto; padding: 0 var(--gutter); }
   .newsletter h2 { margin: 18px 0 20px; }
@@ -731,7 +733,7 @@
 </section>
 
 <!-- =================== VISIT =================== -->
-<section style="padding:0; background:var(--paper);">
+<section style="padding:0; background:var(--paper); overflow:hidden;">
   <div class="container-wide">
     <div class="visit-grid">
       <div class="visit-grid__copy">
