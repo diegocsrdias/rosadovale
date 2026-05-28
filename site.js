@@ -214,25 +214,29 @@ document.querySelectorAll("[data-gallery]").forEach(g => {
   syncBottomBadge();
 })();
 
-// ============== Mobile: sticky buy bar (product page only) ==============
+// ============== Mobile: sticky buy bar with stepper (product page only) ==============
 (function () {
-  const btnAdd = document.querySelector("#btn-add-cart");
-  if (!btnAdd) return;
+  const anchor = document.querySelector("#buy-row-anchor");
+  if (!anchor) return;
+
+  const prodId = new URLSearchParams(window.location.search).get("id");
 
   const bar = document.createElement("div");
   bar.className = "sticky-buy";
-  bar.setAttribute("aria-label", "Adicionar ao carrinho");
+  bar.setAttribute("aria-label", "Controle de quantidade");
   bar.innerHTML = `
     <div class="sticky-buy__info">
       <span class="sticky-buy__name" id="sticky-buy-name">—</span>
       <span class="sticky-buy__price" id="sticky-buy-price">—</span>
     </div>
-    <button class="btn btn-green sticky-buy__btn" id="sticky-buy-btn">Adicionar</button>`;
+    <div class="sticky-buy__stepper">
+      <button class="sticky-dn" aria-label="Remover">−</button>
+      <span class="sticky-n" id="sticky-buy-n">0</span>
+      <button class="sticky-up" aria-label="Adicionar">+</button>
+    </div>`;
   document.body.appendChild(bar);
 
-  // Fill product info after produto.js's DOMContentLoaded handler has run
-  // (site.js is defer → DOMContentLoaded listeners registered here fire
-  //  after non-defer scripts' listeners, so produto.js populates DOM first)
+  // Fill product info after produto.js populates the DOM
   document.addEventListener("DOMContentLoaded", () => {
     const nameEl = document.querySelector("#prod-name");
     const priceEl = document.querySelector("#prod-price-main");
@@ -242,19 +246,33 @@ document.querySelectorAll("[data-gallery]").forEach(g => {
     if (priceEl && p) p.textContent = priceEl.textContent;
   });
 
-  // Show bar when the original add-to-cart button scrolls out of view
+  // Show bar when the product stepper scrolls out of view
   const obs = new IntersectionObserver(entries => {
     bar.classList.toggle("visible", !entries[0].isIntersecting);
   }, { threshold: 0 });
-  obs.observe(btnAdd);
+  obs.observe(anchor);
 
-  // Mirror the main button's click
-  const stickyBtn = bar.querySelector("#sticky-buy-btn");
-  stickyBtn.addEventListener("click", () => {
-    btnAdd.click();
-    const orig = stickyBtn.textContent;
-    stickyBtn.textContent = "Adicionado ✓";
-    stickyBtn.style.background = "var(--green-deep)";
-    setTimeout(() => { stickyBtn.textContent = orig; stickyBtn.style.background = ""; }, 1600);
+  // Stepper interactions
+  bar.querySelector(".sticky-up").addEventListener("click", () => {
+    if (prodId) Cart.add(prodId, 1);
   });
+  bar.querySelector(".sticky-dn").addEventListener("click", () => {
+    if (!prodId) return;
+    const item = Cart.summary().items.find(i => i.id === prodId);
+    if (!item) return;
+    if (item.qty <= 1) Cart.remove(prodId);
+    else Cart.updateQty(prodId, item.qty - 1);
+  });
+
+  // Sync counter
+  function syncStickyCount() {
+    const item = prodId ? Cart.summary().items.find(i => i.id === prodId) : null;
+    const qty = item ? item.qty : 0;
+    const nEl = document.getElementById("sticky-buy-n");
+    if (nEl) nEl.textContent = qty;
+    const dn = bar.querySelector(".sticky-dn");
+    if (dn) dn.style.opacity = qty > 0 ? "1" : "0.35";
+  }
+  document.addEventListener("cart:updated", syncStickyCount);
+  syncStickyCount();
 })();

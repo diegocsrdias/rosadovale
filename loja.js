@@ -70,14 +70,11 @@
             ${tagHTML}
             <svg class="bottle-svg ${p.bottleClass}" viewBox="0 0 120 360"><use href="#bottle"/></svg>
             <div class="product-card__quick">
-              <button class="quick-add" data-product-id="${p.id}" aria-label="Adicionar ao carrinho">
-                Adicionar ao carrinho
-              </button>
-              <button class="quick-fav" aria-label="Favoritar">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/>
-                </svg>
-              </button>
+              <div class="card-stepper is-zero" data-stepper data-product-id="${p.id}">
+                <button class="card-stepper__dn" aria-label="Remover">−</button>
+                <span class="card-stepper__n">0</span>
+                <button class="card-stepper__up" aria-label="Adicionar">Adicionar</button>
+              </div>
             </div>
           </div>
           <div class="product-card__body">
@@ -91,6 +88,15 @@
           </div>
         </a>
       `;
+    }
+
+    /* ─── Stepper sync helper ─── */
+    function syncStepper(el) {
+      const id = el.dataset.productId;
+      const item = Cart.summary().items.find(i => i.id === id);
+      const qty = item ? item.qty : 0;
+      el.classList.toggle('is-zero', qty === 0);
+      el.querySelector('.card-stepper__n').textContent = qty;
     }
 
     /* ─── Render grid ─── */
@@ -111,25 +117,32 @@
       // Render
       gridEl.innerHTML = products.map(cardHTML).join('');
 
-      // Bind add-to-cart
-      gridEl.querySelectorAll('.quick-add').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+      // Bind card steppers
+      gridEl.querySelectorAll('[data-stepper]').forEach(el => {
+        syncStepper(el);
+        const id = el.dataset.productId;
+        el.querySelector('.card-stepper__up').addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
-          const id = btn.dataset.productId;
           Cart.add(id, 1);
-          const p = getProduto(id);
-          if (p) showCartToast(p.name);
-          const orig = btn.textContent;
-          btn.textContent = 'Adicionado ✓';
-          btn.style.cssText = 'background:var(--green);color:var(--cream);';
-          setTimeout(() => {
-            btn.textContent = orig;
-            btn.style.cssText = '';
-          }, 1600);
+          const prod = getProduto(id);
+          if (prod) showCartToast(prod.name);
+        });
+        el.querySelector('.card-stepper__dn').addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const item = Cart.summary().items.find(i => i.id === id);
+          if (!item) return;
+          if (item.qty <= 1) Cart.remove(id);
+          else Cart.updateQty(id, item.qty - 1);
         });
       });
     }
+
+    /* ─── Re-sync steppers on cart change ─── */
+    document.addEventListener('cart:updated', () => {
+      gridEl.querySelectorAll('[data-stepper]').forEach(syncStepper);
+    });
 
     /* ─── Init ─── */
     renderChips();

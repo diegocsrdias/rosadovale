@@ -96,18 +96,82 @@
 
   /* Qty + buy */
   .buy-row { display: flex; gap: 12px; align-items: stretch; }
-  .qty {
+
+  /* Product page stepper */
+  .prod-stepper {
+    display: flex;
+    align-items: stretch;
+    height: 56px;
+    flex: 1;
+    border: 1.5px solid var(--ink);
+    overflow: hidden;
+    background: var(--paper);
+    transition: border-color 0.2s;
+  }
+  .prod-stepper__dn,
+  .prod-stepper__up {
+    flex-shrink: 0;
+    width: 56px;
     display: flex;
     align-items: center;
-    border: 1px solid var(--ink);
-    height: 56px;
-    background: var(--paper);
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--ink);
+    background: none;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.12s;
   }
-  .qty button { width: 44px; height: 100%; font-size: 18px; }
-  .qty button:hover { background: var(--cream-soft); }
-  .qty input { width: 48px; height: 100%; text-align: center; border: none; background: transparent; font: inherit; font-size: 16px; font-weight: 700; }
-  .qty input:focus { outline: none; }
-  .buy-row .btn { flex: 1; height: 56px; padding: 0 24px; }
+  .prod-stepper__dn:hover,
+  .prod-stepper__up:hover { background: var(--cream-soft); }
+  .prod-stepper__dn:active,
+  .prod-stepper__up:active { background: var(--green-soft); }
+  .prod-stepper__mid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    pointer-events: none;
+    user-select: none;
+  }
+  .prod-stepper__n {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .prod-stepper__label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  /* Zero state: full-width green "Adicionar" button */
+  .prod-stepper.is-zero .prod-stepper__dn  { display: none; }
+  .prod-stepper.is-zero .prod-stepper__mid { display: none; }
+  .prod-stepper.is-zero .prod-stepper__up {
+    width: 100%;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-family: var(--sans);
+    color: var(--cream);
+    background: var(--green);
+  }
+  .prod-stepper.is-zero .prod-stepper__up:hover { background: var(--green-deep); }
+  /* Positive state */
+  .prod-stepper:not(.is-zero) { border-color: var(--green); }
+  .prod-stepper:not(.is-zero) .prod-stepper__up { color: var(--green-deep); }
+  .prod-stepper:not(.is-zero) .prod-stepper__dn { color: var(--wine); }
+  .prod-stepper:not(.is-zero) .prod-stepper__n  { color: var(--green-deep); }
 
   .info__meta { display: flex; flex-direction: column; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); }
   .meta-row { display: flex; gap: 14px; font-size: 13px; color: var(--ink-soft); }
@@ -332,13 +396,15 @@
           </div>
         </div>
 
-        <div class="buy-row">
-          <div class="qty" data-qty>
-            <button data-qty-down aria-label="Diminuir">−</button>
-            <input type="text" value="1" aria-label="Quantidade">
-            <button data-qty-up aria-label="Aumentar">+</button>
+        <div class="buy-row" id="buy-row-anchor">
+          <div class="prod-stepper is-zero" id="prod-stepper">
+            <button class="prod-stepper__dn" aria-label="Remover do carrinho">−</button>
+            <div class="prod-stepper__mid">
+              <span class="prod-stepper__n" id="prod-stepper-n">0</span>
+              <span class="prod-stepper__label">no carrinho</span>
+            </div>
+            <button class="prod-stepper__up" aria-label="Adicionar ao carrinho">Adicionar ao carrinho</button>
           </div>
-          <button class="btn btn-green btn-lg" id="btn-add-cart" style="flex:1;">Adicionar ao carrinho</button>
         </div>
 
         <button class="btn btn-outline btn-block" id="btn-buy-now">Comprar agora — finalizar no PIX</button>

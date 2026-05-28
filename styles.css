@@ -452,6 +452,68 @@ section { padding: clamp(60px, 9vw, 140px) 0; }
 }
 .quick-fav:hover { color: var(--wine); border-color: var(--wine); }
 
+/* ---- Card stepper (quantity control on product cards) ---- */
+.card-stepper {
+  display: flex;
+  align-items: stretch;
+  height: 42px;
+  width: 100%;
+  border: 1.5px solid var(--ink);
+  overflow: hidden;
+  background: var(--paper);
+  transition: border-color 0.15s;
+}
+.card-stepper__dn,
+.card-stepper__up {
+  flex-shrink: 0;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--ink);
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.12s;
+}
+.card-stepper__dn:hover,
+.card-stepper__up:hover { background: var(--cream-soft); }
+.card-stepper__dn:active,
+.card-stepper__up:active { background: var(--green-soft); }
+.card-stepper__n {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  pointer-events: none;
+  user-select: none;
+}
+/* Zero state: only + visible, styled as full-width "Adicionar" */
+.card-stepper.is-zero .card-stepper__dn { display: none; }
+.card-stepper.is-zero .card-stepper__n  { display: none; }
+.card-stepper.is-zero .card-stepper__up {
+  width: 100%;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-family: var(--sans);
+}
+.card-stepper.is-zero .card-stepper__up:hover { background: var(--green); color: var(--cream); }
+/* Positive state: green accent */
+.card-stepper:not(.is-zero) { border-color: var(--green); }
+.card-stepper:not(.is-zero) .card-stepper__up { color: var(--green-deep); }
+.card-stepper:not(.is-zero) .card-stepper__dn { color: var(--wine); }
+.card-stepper:not(.is-zero) .card-stepper__n  { color: var(--green-deep); }
+
 .product-card__body {
   padding: 20px 4px 8px;
   display: flex;
@@ -1083,12 +1145,43 @@ section { padding: clamp(60px, 9vw, 140px) 0; }
   letter-spacing: -0.03em;
   line-height: 1.2;
 }
-.sticky-buy__btn {
+/* Sticky buy stepper */
+.sticky-buy__stepper {
+  display: flex;
+  align-items: stretch;
+  height: 48px;
+  border: 1.5px solid var(--ink);
+  overflow: hidden;
   flex-shrink: 0;
-  padding: 14px 18px;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  white-space: nowrap;
+  min-width: 124px;
+}
+.sticky-dn,
+.sticky-up {
+  flex: 0 0 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 300;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.12s;
+}
+.sticky-dn:active, .sticky-up:active { background: var(--cream-soft); }
+.sticky-n {
+  min-width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--green-deep);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  padding: 0 6px;
 }
 
 /* ---- Toast position on mobile ---- */

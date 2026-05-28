@@ -149,6 +149,7 @@
         <h1 id="cart-heading" style="margin-top:14px;">No carrinho · <em>0 garrafas</em></h1>
       </div>
       <a href="loja.html" class="btn btn-ghost">← Continuar comprando</a>
+      <button id="clear-cart-btn" class="btn btn-ghost" style="display:none; color:var(--wine); border-color:var(--wine);">Limpar carrinho</button>
     </div>
 
     <div class="steps">
@@ -286,6 +287,13 @@
     var faltam=Math.max(0,400-subtotal);
     if(el('free-shipping-label')) el('free-shipping-label').textContent=faltam>0?'Faltam R$ '+fmt(faltam)+' para frete grátis':'Você ganhou frete grátis!';
     if(el('free-shipping-bar')) el('free-shipping-bar').style.width=Math.min(100,(subtotal/400)*100)+'%';
+    var clearBtn=document.getElementById('clear-cart-btn');
+    if(clearBtn){
+      clearBtn.style.display=count>0?'':'none';
+      clearBtn.onclick=function(){
+        if(window.confirm('Limpar todo o carrinho?')) Cart.clear();
+      };
+    }
   }
   document.addEventListener('DOMContentLoaded',renderCart);
   document.addEventListener('cart:updated',renderCart);

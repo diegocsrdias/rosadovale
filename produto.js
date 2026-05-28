@@ -83,26 +83,37 @@
     /* ─── Description tab ─── */
     setText('prod-descricao-full', produto.descricao);
 
-    /* ─── Add to cart button ─── */
-    const addBtn = document.getElementById('btn-add-cart');
+    /* ─── Product page stepper ─── */
+    const prodStepper = document.getElementById('prod-stepper');
     const buyNowBtn = document.getElementById('btn-buy-now');
-    const qtyInput = document.querySelector('[data-qty] input');
 
-    if (addBtn) {
-      addBtn.addEventListener('click', () => {
-        const qty = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
-        Cart.add(produto.id, qty);
+    function syncProdStepper() {
+      if (!prodStepper) return;
+      const item = Cart.summary().items.find(i => i.id === produto.id);
+      const qty = item ? item.qty : 0;
+      prodStepper.classList.toggle('is-zero', qty === 0);
+      const n = document.getElementById('prod-stepper-n');
+      if (n) n.textContent = qty;
+    }
+
+    if (prodStepper) {
+      prodStepper.querySelector('.prod-stepper__up').addEventListener('click', () => {
+        Cart.add(produto.id, 1);
         showCartToast(produto.name);
-        const orig = addBtn.textContent;
-        addBtn.textContent = 'Adicionado ✓';
-        setTimeout(() => { addBtn.textContent = orig; }, 1500);
       });
+      prodStepper.querySelector('.prod-stepper__dn').addEventListener('click', () => {
+        const item = Cart.summary().items.find(i => i.id === produto.id);
+        if (!item) return;
+        if (item.qty <= 1) Cart.remove(produto.id);
+        else Cart.updateQty(produto.id, item.qty - 1);
+      });
+      document.addEventListener('cart:updated', syncProdStepper);
+      syncProdStepper();
     }
 
     if (buyNowBtn) {
       buyNowBtn.addEventListener('click', () => {
-        const qty = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
-        Cart.add(produto.id, qty);
+        Cart.add(produto.id, 1);
         window.location.href = 'checkout.html';
       });
     }
